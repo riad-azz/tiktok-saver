@@ -1,0 +1,33 @@
+{
+  "name": "Tiktok Saver",
+  "short_name": "Tiktok Saver",
+  "icons": [
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en-us",
+  "dir": "ltr",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "landscape-primary",
+  "description": "Tiktok Saver is...",
+  "categories": [
+    "Entertainment",
+    "Social",
+    "Video",
+    "Saver",
+    "Downloader",
+    "Tiktok",
+    "Media"
+  ]
+}

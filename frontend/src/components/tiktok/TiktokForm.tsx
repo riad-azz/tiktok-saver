@@ -39,8 +39,8 @@ const downloadVideo = async (videoInfo: VideoInfo) => {
   }
 };
 
-const Form = () => {
-  const [videoUrl, setVideoUrl] = useState("");
+const TiktokForm = () => {
+  const [inputUrl, setInputUrl] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,7 +55,7 @@ const Form = () => {
     setErrorMsg("");
 
     try {
-      const videoInfo: any = await fetchVideoInfo(videoUrl);
+      const videoInfo: any = await fetchVideoInfo(inputUrl);
 
       if (videoInfo.error) {
         throw new Error(videoInfo.error);
@@ -70,12 +70,17 @@ const Form = () => {
   }
 
   return (
-    <>
+    <div className="w-full flex flex-col justify-center items-center bg-gradient-to-r from-[#00c6ff] to-[#0072ff] h-80">
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-8">
+        Tiktok Saver
+      </h1>
       {errorMsg !== "" && (
-        <div className="mb-1 text-sm text-red-500 md:text-base">{errorMsg}</div>
+        <div className="mb-1 w-full md:max-w-2xl p-2 rounded bg-gray-300/50 text-red-500 mx-4 px-4">
+          {errorMsg}
+        </div>
       )}
       <form
-        className="flex max-w-md items-center gap-4"
+        className="flex flex-col w-full md:max-w-2xl items-center gap-4 md:relative px-4 md:px-0 md:flex-row"
         onSubmit={handleSubmit}
       >
         <label htmlFor="url-input" className="sr-only">
@@ -84,24 +89,24 @@ const Form = () => {
         <input
           id="url-input"
           type="url"
-          value={videoUrl}
+          value={inputUrl}
           autoFocus={true}
-          onChange={(e) => setVideoUrl(e.target.value)}
-          placeholder="Enter URL here..."
-          aria-label="ideo download URL input"
+          onChange={(e) => setInputUrl(e.target.value)}
+          placeholder="Paste Tiktok link here..."
+          aria-label="video download URL input"
           title="video download URL input"
-          className="w-full rounded border border-slate-400 px-2 py-3 placeholder-gray-400/80 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded border text-gray-700 bg-gray-100 border-purple-600 px-2 py-4 placeholder-gray-400/80 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="w-fit rounded bg-blue-500 px-2 py-3 text-white"
+          className="w-full md:w-fit rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white md:absolute md:right-2 shadow-md"
         >
           {isLoading ? "Fetching..." : "Download"}
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
-export default Form;
+export default TiktokForm;
