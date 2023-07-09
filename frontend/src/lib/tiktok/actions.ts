@@ -4,9 +4,14 @@ import { tiktokApiURL } from "@/configs/config";
 import { VideoInfo } from "@/types";
 
 export const fetchVideoInfo = async (videoUrl: string) => {
-  const response = await fetch(`${tiktokApiURL}?url=${videoUrl}`, {
-    method: "GET",
-  });
+  let response;
+  try {
+    response = await fetch(`${tiktokApiURL}?url=${videoUrl}`, {
+      method: "GET",
+    });
+  } catch (error) {
+    return { error: "Internal Server Error" };
+  }
 
   const contentType = response.headers.get("content-type");
   if (!contentType || !contentType.includes("application/json")) {

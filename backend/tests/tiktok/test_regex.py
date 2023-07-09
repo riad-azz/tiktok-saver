@@ -1,13 +1,15 @@
-import re
+import pytest
+from app.tiktok.validators import validate_tiktok_url, BadRequest
 
 
 def test_tiktok_url():
-    url = "https://www.tiktok.com/@santiagothewiz/video/7253509446972738859"
-    regex_pattern = r"https?://(?:www\.)?tiktok\.com/[@\w]+/video/\d+"
-    assert re.match(regex_pattern, url) is not None
+    url = "https://www.tiktok.com/@kylegordonisgreat/video/7253101692495973674?is_from_webapp=1&sender_device=pc"
+    valid_url = validate_tiktok_url(url)
+    assert valid_url is not None
+    assert valid_url == "https://www.tiktok.com/@kylegordonisgreat/video/7253101692495973674"
 
 
 def test_invalid_tiktok_url():
     url = "https://www.example.com"
-    regex_pattern = r"https?://(?:www\.)?tiktok\.com/[@\w]+/video/\d+"
-    assert re.match(regex_pattern, url) is None
+    with pytest.raises(BadRequest):
+        validate_tiktok_url(url)

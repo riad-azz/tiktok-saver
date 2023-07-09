@@ -3,9 +3,9 @@ from flask import Blueprint, request, send_file
 
 # Other modules
 import urllib.parse
+from werkzeug.exceptions import BadRequest
 
 # Local modules
-from app.utils.flask import error_response
 from app.utils.http import download_file_to_memory
 
 proxy_bp = Blueprint("proxy", __name__, url_prefix="/proxy")
@@ -15,11 +15,11 @@ proxy_bp = Blueprint("proxy", __name__, url_prefix="/proxy")
 def proxy_file_api():
     encoded_url = request.url.split("?url=")[-1]
     if not encoded_url:
-        return error_response("Bad Request, missing params", 400)
+        raise BadRequest("Bad Request, missing params")
 
     # This is necessary to keep the video URL params
     decoded_url = urllib.parse.unquote(encoded_url)
-
+    # Save the file in memory and serve it
     file_in_memory = download_file_to_memory(decoded_url, "video/mp4")
 
     response = send_file(

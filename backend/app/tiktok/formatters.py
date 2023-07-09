@@ -30,9 +30,9 @@ def format_post_json(post: dict):
     video = {
         "filename": video_filename,
         "duration": video_duration,
+        "is_watermarked": is_watermarked,
         "video_link": video_link,
         "thumbnail": video_thumbnail,
-        "is_watermarked": is_watermarked,
     }
 
     return video

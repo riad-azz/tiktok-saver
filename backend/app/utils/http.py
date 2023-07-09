@@ -26,7 +26,7 @@ def bytes_to_memory_file(file_bytes: bytes) -> BytesIO:
         file_in_memory.seek(0)
         return file_in_memory
     except:
-        raise InternalServerError()
+        raise InternalServerError("Internal Server Error")
 
 
 def download_file_to_memory(url: str, file_type: str) -> BytesIO:

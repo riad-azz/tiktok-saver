@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.routes import API_BP
+from app.routes import api_bp
 from app.extensions import cors, limiter
 from app.utils.flask import error_response
 from app.config import DevConfig, ProdConfig
@@ -22,7 +22,7 @@ def create_app(debug: bool = False):
     limiter.init_app(app)
 
     # Register blueprints or routes
-    app.register_blueprint(API_BP)
+    app.register_blueprint(api_bp)
 
     # Global error handler
     @app.errorhandler(Exception)

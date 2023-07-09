@@ -1,0 +1,23 @@
+# Python
+**/venv
+**/tests
+**/__pycache__
+
+# Nextjs
+**/.next
+**/dist
+**/node_modules
+**/npm-debug.log
+
+# IDE + Git
+**/.git
+**/.vscode
+**/.idea
+
+# .env files
+**/.env.example
+
+# Other
+**/DEVNOTES.md
+**/README.md
+**/LICENSE.MD
