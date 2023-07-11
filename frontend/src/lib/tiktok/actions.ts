@@ -1,7 +1,7 @@
 "use server";
 
 import { tiktokApiURL } from "@/configs/config";
-import { VideoInfo } from "@/types";
+import { VideoInfo } from "@/types/tiktok";
 
 export const fetchVideoInfo = async (videoUrl: string) => {
   let response;

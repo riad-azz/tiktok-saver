@@ -1,5 +1,5 @@
 # Local modules
-from app.lib.tiktok import validate_tiktok_url
+from app.lib.tiktok import is_valid_tiktok_domain
 
 
 def test_valid_tiktok_url():
@@ -10,10 +10,10 @@ def test_valid_tiktok_url():
         "https://vm.tiktok.com/@user/v/7541654654"
     ]
     for url in urls_list:
-        assert validate_tiktok_url(url) is True
+        assert is_valid_tiktok_domain(url) is True
 
 
 def test_invalid_tiktok_url():
     url = "https://www.example.com"
-    valid_url = validate_tiktok_url(url)
+    valid_url = is_valid_tiktok_domain(url)
     assert valid_url is False

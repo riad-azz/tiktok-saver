@@ -3,6 +3,9 @@ def format_post_json(post: dict):
     if post_type != "video":
         return None
 
+    if "music" in post["formats"][0]["url"]:
+        return None
+
     is_watermarked = False
     highest_quality = list(filter(lambda item: "h264" in item["vcodec"], post["formats"]))
     no_watermark_videos = list(filter(lambda item: "direct video" in item["format"].lower(), highest_quality))
@@ -20,7 +23,7 @@ def format_post_json(post: dict):
         return None
 
     video_filename = post.get("filename", "tiktok_video.mp4")
-    video_duration = video_format.get("duration", "")
+    video_duration = post.get("duration", "")
     video_link = video_format.get("url", "")
     video_thumbnail = post.get("thumbnail", "")
 
@@ -36,5 +39,5 @@ def format_post_json(post: dict):
 
 
 def format_video_info(data: dict):
-    video_info = format_video_info(data)
+    video_info = format_post_json(data)
     return video_info

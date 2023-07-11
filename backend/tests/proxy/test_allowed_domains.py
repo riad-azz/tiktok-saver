@@ -1,5 +1,5 @@
 # Local modules
-from app.lib.proxy import validate_tiktok_url
+from app.lib.proxy import is_allowed_proxy_domain
 
 
 def test_valid_tiktok_url():
@@ -11,10 +11,10 @@ def test_valid_tiktok_url():
         "line=0&is_play_url=1&source=PackSourceEnum_FEED&file_id=023e564f131e40b59a6f7bc85099e7ed&"
         "item_id=7253860622557908266&signv3=video_id;file_id;item_id.09e6e43bafd52daea9d780c5caba0141"]
     for url in urls_list:
-        assert validate_tiktok_url(url) is True
+        assert is_allowed_proxy_domain(url) is True
 
 
 def test_invalid_tiktok_url():
     url = "https://www.example.com"
-    valid_url = validate_tiktok_url(url)
+    valid_url = is_allowed_proxy_domain(url)
     assert valid_url is False

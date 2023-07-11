@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { fetchVideoInfo } from "@/lib/tiktok/actions";
 import { proxyApiURL } from "@/configs/config";
-import { VideoInfo } from "@/types";
+import { VideoInfo } from "@/types/tiktok";
 
 const downloadVideo = async (videoInfo: VideoInfo) => {
   try {
