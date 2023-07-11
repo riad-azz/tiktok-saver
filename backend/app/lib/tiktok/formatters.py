@@ -1,10 +1,7 @@
-from werkzeug.exceptions import InternalServerError, BadRequest
-
-
 def format_post_json(post: dict):
     post_type = post.get("_type", None)
     if post_type != "video":
-        raise BadRequest("This post does not contain a video")
+        return None
 
     is_watermarked = False
     highest_quality = list(filter(lambda item: "h264" in item["vcodec"], post["formats"]))
@@ -20,7 +17,7 @@ def format_post_json(post: dict):
         video_format = post["formats"][0]
 
     if not video_format:
-        raise BadRequest("This post does not contain a video")
+        return None
 
     video_filename = post.get("filename", "tiktok_video.mp4")
     video_duration = video_format.get("duration", "")
@@ -39,7 +36,5 @@ def format_post_json(post: dict):
 
 
 def format_video_info(data: dict):
-    if not data:
-        raise InternalServerError("Video data is missing")
-
-    return format_post_json(data)
+    video_info = format_video_info(data)
+    return video_info
