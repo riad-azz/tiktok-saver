@@ -10,7 +10,7 @@ export const LogoLink: React.FC<LogoLinkProps> = ({ title, href }) => {
   return (
     <Link className="flex items-center gap-2 py-2" href={href}>
       <Icons.download />
-      <span className="self-center whitespace-nowrap text-2xl font-semibold text-white">
+      <span className="self-center whitespace-nowrap text-2xl font-semibold">
         {title}
       </span>
     </Link>

@@ -1,7 +1,8 @@
 export type VideoInfo = {
   filename: string;
-  duration: number;
   is_watermarked: boolean;
+  duration: number;
+  description: string;
   video_link: string;
   thumbnail: string;
 };

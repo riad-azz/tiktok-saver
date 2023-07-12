@@ -17,18 +17,18 @@ type NavbarLinkProps = {
 const navbarLinks: NavbarLinkProps[] = [
   {
     id: 0,
-    title: "Home",
-    href: "/",
+    title: "Features",
+    href: "#features",
   },
   {
     id: 1,
-    title: "Contact",
-    href: "https://github.com/riad-azz",
+    title: "How To Use?",
+    href: "#how-to-use",
   },
   {
     id: 2,
     title: "About",
-    href: "https://github.com/riad-azz",
+    href: "#about",
   },
 ];
 
@@ -39,7 +39,7 @@ const Navbar = () => {
     <header className="fixed top-0 z-50 w-full">
       <nav
         role="navigation"
-        className="flex w-full flex-col items-center justify-between gap-2 border-gray-300 bg-blue-600 px-4 py-1 md:flex-row md:px-8"
+        className="flex w-full flex-col items-center justify-between gap-2 border-gray-300 bg-white px-4 py-1 text-black shadow md:flex-row md:px-8"
       >
         <div className="flex w-full items-center md:gap-2">
           {/* Logo */}
@@ -64,7 +64,11 @@ const Navbar = () => {
           } md:hidden`}
         >
           {navbarLinks.map((link) => (
-            <MobileNavLink key={link.id} href={link.href}>
+            <MobileNavLink
+              key={link.id}
+              href={link.href}
+              onClick={() => setShowMenu(false)}
+            >
               <span>{link.title}</span>
             </MobileNavLink>
           ))}

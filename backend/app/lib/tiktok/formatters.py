@@ -1,3 +1,5 @@
+import time
+
 def format_post_json(post: dict):
     post_type = post.get("_type", None)
     if post_type != "video":
@@ -21,16 +23,20 @@ def format_post_json(post: dict):
 
     if not video_format:
         return None
+    
+    timestamp = str(int(time.time()))
+    filename = f"tiktok-saver-{timestamp}.mp4"
 
-    video_filename = post.get("filename", "tiktok_video.mp4")
+    video_description = post.get("description", "No description")
     video_duration = post.get("duration", "")
     video_link = video_format.get("url", "")
     video_thumbnail = post.get("thumbnail", "")
 
     video = {
-        "filename": video_filename,
-        "duration": video_duration,
+        "filename": filename,
         "is_watermarked": is_watermarked,
+        "duration": video_duration,
+        "description": video_description,
         "video_link": video_link,
         "thumbnail": video_thumbnail,
     }

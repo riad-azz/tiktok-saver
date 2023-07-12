@@ -11,7 +11,9 @@ export const fetchVideoInfo = async (videoUrl: string) => {
     response = await fetch(`${tiktokApiURL}?url=${videoUrl}`, {
       method: "GET",
     });
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error);
+    console.log(error.message);
     const response: ErrorResponse = {
       status: "error",
       message: "API service is down, please try again later.",
