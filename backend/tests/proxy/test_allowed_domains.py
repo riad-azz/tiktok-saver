@@ -2,7 +2,7 @@
 from app.lib.proxy import is_allowed_proxy_domain
 
 
-def test_valid_tiktok_url():
+def test_valid_proxy_domain():
     urls_list = [
         "https://api16-normal-c-useast1a.tiktokv.com/",
         "https://v77.tiktokcdn.com/",
@@ -14,7 +14,7 @@ def test_valid_tiktok_url():
         assert is_allowed_proxy_domain(url) is True
 
 
-def test_invalid_tiktok_url():
+def test_invalid_proxy_domain():
     url = "https://www.example.com"
     valid_url = is_allowed_proxy_domain(url)
     assert valid_url is False

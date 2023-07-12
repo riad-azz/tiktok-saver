@@ -1,6 +1,7 @@
 "use server";
 
 import { tiktokApiURL } from "@/configs/config";
+import { APIResponse } from "@/types";
 import { VideoInfo } from "@/types/tiktok";
 
 export const fetchVideoInfo = async (videoUrl: string) => {
@@ -18,6 +19,6 @@ export const fetchVideoInfo = async (videoUrl: string) => {
     return { error: "Internal Server Error" };
   }
 
-  const data: VideoInfo = await response.json();
-  return data;
+  const apiResponse: APIResponse<VideoInfo> = await response.json();
+  return apiResponse;
 };

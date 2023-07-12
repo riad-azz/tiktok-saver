@@ -1,4 +1,5 @@
 import pytest
+from flask_limiter.util import get_remote_address
 from app import create_app
 from app.extensions import limiter
 
@@ -9,6 +10,7 @@ def app():
     limiter.enabled = True
 
     @app.route('/')
+    @limiter.limit(key_func=get_remote_address, limit_value="5 per minute")
     def index():
         return "Test route"
 

@@ -12,7 +12,7 @@ RATELIMIT_STORAGE_URL = os.environ.get("RATELIMIT_STORAGE_URL", "memory://")
 
 
 def default_exempt_when():
-    EXEMPTED_HOSTS = ["127.0.0.1", "localhost", "192.168.1.2"]
+    EXEMPTED_HOSTS = ["127.0.0.1", "localhost"]
     return request.remote_addr in EXEMPTED_HOSTS
 
 

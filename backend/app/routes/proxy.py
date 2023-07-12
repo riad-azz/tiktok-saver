@@ -1,13 +1,15 @@
 # Flask modules
-from flask import Blueprint, request, send_file
+from flask import Blueprint, Response, request, stream_with_context
 
 # Other modules
+import time
+import requests
 import urllib.parse
-from werkzeug.exceptions import BadRequest, Unauthorized
+from werkzeug.exceptions import BadRequest, Unauthorized, InternalServerError
 
 # Local modules
-from app.lib.proxy import download_file_to_memory
 from app.lib.proxy import is_allowed_proxy_domain
+
 proxy_bp = Blueprint("proxy", __name__, url_prefix="/proxy")
 
 
@@ -25,13 +27,21 @@ def proxy_file_api():
     if not is_valid_url:
         raise Unauthorized("Unauthorized request")
 
-    # Save the file in memory and serve it
-    file_in_memory = download_file_to_memory(decoded_url, "video/mp4")
+    try:
+        response = requests.get(decoded_url, stream=True)
+        headers = response.headers
 
-    response = send_file(
-        file_in_memory,
-        mimetype="video/mp4",
-        download_name="video.mp4",
-        as_attachment=True,
-    )
-    return response
+        if headers.get("Content-type") != "video/mp4":
+            raise BadRequest("Invalid file type, only videos are allowed")
+
+        # Set the content disposition header for the downloaded file
+        timestamp = str(int(time.time()))
+        filename = f"tiktok-saver-{timestamp}.mp4"
+        headers['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+        return Response(stream_with_context(response.iter_content(chunk_size=1024)),
+                        headers=dict(headers),
+                        status=response.status_code)
+    except Exception as e:
+        print(f"Something went wrong while proxy downloading : {e}")
+        raise InternalServerError("Internal Server Error")

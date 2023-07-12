@@ -25,7 +25,8 @@ def test_tiktok_api_invalid_post(app):
         response = client.get(f'/api/tiktok/info?url={SLIDES_POST_URL}')
         assert response.status_code == 400
         assert response.headers['Content-Type'] == 'application/json'
-        assert response.json["error"] == "Unable to extract video URL, please make sure this post contains a video"
+        assert response.json["status"] == "error"
+        assert response.json["message"] == "Unable to extract video URL, please make sure this post contains a video"
 
 
 def test_tiktok_api_invalid_url(app):
@@ -33,4 +34,5 @@ def test_tiktok_api_invalid_url(app):
         response = client.get(f'/api/tiktok/info?url={INVALID_URL}')
         assert response.status_code == 400
         assert response.headers['Content-Type'] == 'application/json'
-        assert response.json["error"] == "Invalid Tiktok URL"
+        assert response.json["status"] == "error"
+        assert response.json["message"] == "Invalid Tiktok URL"

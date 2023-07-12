@@ -1,7 +1,6 @@
 def is_valid_tiktok_domain(url: str):
     allowed_domains = [
         "https://m.tiktok.com/",
-        "https://tiktok.com/dummy/",
         "https://www.tiktok.com/",
         "https://tiktok.com/",
         "https://vm.tiktok.com/"
