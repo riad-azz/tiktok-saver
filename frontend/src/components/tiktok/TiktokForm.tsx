@@ -4,19 +4,16 @@ import { FormEvent, useState } from "react";
 import { fetchVideoInfo } from "@/lib/tiktok/actions";
 import { proxyApiURL } from "@/configs/config";
 import { VideoInfo } from "@/types/tiktok";
+import { APIResponse, ErrorResponse } from "@/types";
 
 const downloadVideo = async (videoInfo: VideoInfo) => {
   try {
     const encodedUrl = encodeURIComponent(videoInfo.video_link);
     const response = await fetch(`${proxyApiURL}?url=${encodedUrl}`);
     const contentType = response.headers.get("content-type");
-    if (!contentType) {
-      throw new Error("Bad proxy response");
-    } else if (contentType.includes("application/json")) {
-      const json = await response.json();
-      throw new Error(json.error);
-    } else if (!contentType.includes("video/mp4")) {
-      throw new Error("Bad proxy response");
+    if (contentType && contentType.includes("application/json")) {
+      const json: ErrorResponse = await response.json();
+      throw new Error(json.message);
     }
     const blob = await response.blob();
     const blobUrl = URL.createObjectURL(blob);
@@ -55,12 +52,14 @@ const TiktokForm = () => {
     setErrorMsg("");
 
     try {
-      const videoInfo: any = await fetchVideoInfo(inputUrl);
+      const response = await fetchVideoInfo(inputUrl);
 
-      if (videoInfo.error) {
-        throw new Error(videoInfo.error);
+      if (response.status === "error") {
+        throw new Error(response.message);
       }
-      await downloadVideo(videoInfo as VideoInfo);
+
+      const videoInfo = response.data;
+      await downloadVideo(videoInfo);
       setErrorMsg("");
     } catch (error: any) {
       return handleError(error);

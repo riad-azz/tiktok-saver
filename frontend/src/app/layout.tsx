@@ -6,7 +6,10 @@ import "@/styles/globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
-const mainFont = MainFont({ weight: "400", subsets: ["latin"] });
+const mainFont = MainFont({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
 export const metadata = mainMetadata;
 

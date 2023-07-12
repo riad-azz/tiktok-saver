@@ -1,3 +1,4 @@
+import Image from "next/image";
 import TiktokForm from "@/components/tiktok/TiktokForm";
 
 export default function Home() {
@@ -7,33 +8,47 @@ export default function Home() {
         <TiktokForm />
       </section>
       <section className="text-black container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-3">TikTok Saver</h1>
-        <p className="text-lg">
-          Do you love watching and creating TikTok videos? Do you wish you could
-          save your favorite ones to your device and watch them offline anytime?
-          If you answered yes, then you need TikTok Saver, the ultimate app for
-          TikTok lovers. TikTok Saver lets you download any TikTok video with
-          just one tap. You can also browse, search, and discover new videos
-          from different categories and hashtags. TikTok Saver is fast, easy,
-          and free to use. Download it today and enjoy TikTok like never before.
-        </p>
+        <h1 className="text-3xl font-extrabold mb-8 text-center md:text-4xl">
+          Tiktok Saver Features
+        </h1>
+        <div className="flex flex-col text-lg gap-10 md:gap-2 justify-between md:flex-row items-center mb-4 mx-auto max-w-4xl w-full">
+          <div className="flex flex-col w-full justify-center items-center gap-4">
+            <div className="flex justify-center items-center h-48 object-contain">
+              <Image
+                src="/images/video-quality.png"
+                width={172}
+                height={172}
+                alt="Video quality"
+              />
+            </div>
+            <p className="font-bold">Highest Quality Available</p>
+          </div>
+          <div className="flex flex-col w-full justify-center items-center gap-4">
+            <div className="flex justify-center items-center h-48 object-contain">
+              <Image
+                src="/images/tiktok-logo.png"
+                width={100}
+                height={100}
+                alt="Tiktok logo"
+              />
+            </div>
+            <p className="font-bold">No Tiktok Watermark</p>
+          </div>
+          <div className="flex flex-col w-full justify-center items-center gap-4">
+            <div className="flex justify-center items-center h-48 object-contain">
+              <Image
+                src="/images/unlimited-download.png"
+                width={172}
+                height={172}
+                alt="Tiktok logo"
+              />
+            </div>
+            <p className="font-bold">Free Unlimited Downloads</p>
+          </div>
+        </div>
       </section>
       <section className="text-black container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-3">Features</h1>
-        <ul className="list-disc pl-6 text-lg gap-2 flex-col flex">
-          <li>Download TikTok videos without watermark.</li>
-          <li>Videos with the highest quality available.</li>
-          <li>Unlimited downloads for free.</li>
-          <li>No registration or login required.</li>
-        </ul>
-      </section>
-      <section className="text-black container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-3">How To Use</h1>
-        <p className="mb-3 text-lg">
-          If you want to save your favorite TikTok videos to your device, you
-          can use our website to do it easily and quickly. Here are the steps to
-          follow:
-        </p>
+        <h1 className="text-3xl font-bold mb-3 md:text-4xl">How To Use ?</h1>
         <ol className="list-decimal pl-6 gap-2 text-lg flex-col flex mb-6">
           <li>
             Open the TikTok app or website and find the video you want to save.
