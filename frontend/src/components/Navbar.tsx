@@ -36,10 +36,10 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <header className="w-full fixed top-0 z-50">
+    <header className="fixed top-0 z-50 w-full">
       <nav
         role="navigation"
-        className="flex bg-blue-600 w-full flex-col items-center justify-between gap-2 border-gray-300 px-4 py-1 md:flex-row md:px-8"
+        className="flex w-full flex-col items-center justify-between gap-2 border-gray-300 bg-blue-600 px-4 py-1 md:flex-row md:px-8"
       >
         <div className="flex w-full items-center md:gap-2">
           {/* Logo */}

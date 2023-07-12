@@ -69,17 +69,17 @@ const TiktokForm = () => {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center bg-gradient-to-r from-[#00c6ff] to-[#0072ff] h-80">
-      <h1 className="text-3xl md:text-5xl font-bold text-center mb-8">
+    <div className="flex h-80 w-full flex-col items-center justify-center bg-gradient-to-r from-[#00c6ff] to-[#0072ff]">
+      <h1 className="mb-8 text-center text-3xl font-bold md:text-5xl">
         Tiktok Saver
       </h1>
       {errorMsg !== "" && (
-        <div className="mb-1 w-full md:max-w-2xl p-2 rounded bg-gray-300/50 text-red-500 mx-4 px-4">
+        <div className="mx-4 mb-1 w-full rounded bg-gray-300/50 p-2 px-4 text-red-500 md:max-w-2xl">
           {errorMsg}
         </div>
       )}
       <form
-        className="flex flex-col w-full md:max-w-2xl items-center gap-4 md:relative px-4 md:px-0 md:flex-row"
+        className="flex w-full flex-col items-center gap-4 px-4 md:relative md:max-w-2xl md:flex-row md:px-0"
         onSubmit={handleSubmit}
       >
         <label htmlFor="url-input" className="sr-only">
@@ -94,12 +94,12 @@ const TiktokForm = () => {
           placeholder="Paste Tiktok link here..."
           aria-label="video download URL input"
           title="video download URL input"
-          className="w-full rounded border text-gray-700 bg-gray-100 border-purple-600 px-2 py-4 placeholder-gray-400/80 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+          className="w-full rounded border border-purple-600 bg-gray-100 px-2 py-4 text-gray-700 placeholder-gray-400/80 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full md:w-fit rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white md:absolute md:right-2 shadow-md"
+          className="w-full rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white shadow-md md:absolute md:right-2 md:w-fit"
         >
           {isLoading ? "Fetching..." : "Download"}
         </button>

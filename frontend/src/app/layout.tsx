@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={mainFont.className}>
-      <body className="min-h-screen text-white flex flex-col overflow-x-hidden pt-12">
+      <body className="flex min-h-screen flex-col overflow-x-hidden pt-12 text-white">
         <Navbar />
         {children}
         <Footer />
