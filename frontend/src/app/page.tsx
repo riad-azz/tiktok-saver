@@ -7,13 +7,13 @@ export default function Home() {
       <section>
         <TiktokForm />
       </section>
-      <section className="text-black container mx-auto p-4">
-        <h1 className="text-3xl font-extrabold mb-8 text-center md:text-4xl">
+      <section className="container mx-auto p-4 text-black">
+        <h1 className="mb-8 text-center text-3xl font-extrabold md:text-4xl">
           Tiktok Saver Features
         </h1>
-        <div className="flex flex-col text-lg gap-10 md:gap-2 justify-between md:flex-row items-center mb-4 mx-auto max-w-4xl w-full">
-          <div className="flex flex-col w-full justify-center items-center gap-4">
-            <div className="flex justify-center items-center h-48 object-contain">
+        <div className="mx-auto mb-4 flex w-full max-w-4xl flex-col items-center justify-between gap-10 text-lg md:flex-row md:gap-2">
+          <div className="flex w-full flex-col items-center justify-center gap-4">
+            <div className="flex h-48 items-center justify-center object-contain">
               <Image
                 src="/images/video-quality.png"
                 width={172}
@@ -23,8 +23,8 @@ export default function Home() {
             </div>
             <p className="font-bold">Highest Quality Available</p>
           </div>
-          <div className="flex flex-col w-full justify-center items-center gap-4">
-            <div className="flex justify-center items-center h-48 object-contain">
+          <div className="flex w-full flex-col items-center justify-center gap-4">
+            <div className="flex h-48 items-center justify-center object-contain">
               <Image
                 src="/images/tiktok-logo.png"
                 width={100}
@@ -34,8 +34,8 @@ export default function Home() {
             </div>
             <p className="font-bold">No Tiktok Watermark</p>
           </div>
-          <div className="flex flex-col w-full justify-center items-center gap-4">
-            <div className="flex justify-center items-center h-48 object-contain">
+          <div className="flex w-full flex-col items-center justify-center gap-4">
+            <div className="flex h-48 items-center justify-center object-contain">
               <Image
                 src="/images/unlimited-download.png"
                 width={172}
@@ -47,9 +47,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="text-black container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-3 md:text-4xl">How To Use ?</h1>
-        <ol className="list-decimal pl-6 gap-2 text-lg flex-col flex mb-6">
+      <section className="container mx-auto p-4 text-black">
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">How To Use ?</h1>
+        <ol className="mb-6 flex list-decimal flex-col gap-2 pl-6 text-lg">
           <li>
             Open the TikTok app or website and find the video you want to save.
           </li>
