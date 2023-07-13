@@ -1,4 +1,4 @@
-import { tiktokApiURL } from "@/configs/config";
+import { tiktokApiURL } from "@/configs/api";
 import { APIResponse, ErrorResponse } from "@/types";
 import { VideoInfo } from "@/types/tiktok";
 

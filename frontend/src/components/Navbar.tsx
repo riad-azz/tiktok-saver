@@ -7,6 +7,7 @@ import {
   MobileNavLink,
   MobileMenuButton,
 } from "@/components/navigation";
+import { siteConfig } from "@/configs/site";
 type NavbarLinkProps = {
   id: number;
   title: string;
@@ -44,7 +45,7 @@ const Navbar = () => {
         <div className="flex w-full items-center md:gap-2">
           {/* Logo */}
           <div className="mr-auto w-fit">
-            <LogoLink title="Tiktok Saver" href="/" />
+            <LogoLink title={siteConfig.name} href="/" />
           </div>
           {/* Dropdown menu button */}
           <MobileMenuButton onClick={() => setShowMenu(!showMenu)} />

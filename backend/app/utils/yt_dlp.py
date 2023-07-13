@@ -1,15 +1,7 @@
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-USE_COOKIES = os.environ.get("USE_COOKIES", "False") == "True"
-COOKIES_BROWSER = os.environ.get("COOKIES_BROWSER", "chrome")
-COOKIES_PATH = BASE_DIR / "cookies.txt"
-
+# To use these options you must check : https://github.com/yt-dlp/yt-dlp
+USE_COOKIES = False
+COOKIES_PATH = "cookies.txt"
+COOKIES_BROWSER = "chrome"
 
 def get_command(url: str) -> str:
     if USE_COOKIES:

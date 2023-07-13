@@ -13,6 +13,7 @@ RUN pip install -r requirements.txt
 # Copy the Flask app file
 COPY . .
 
+EXPOSE 5000
 
-# # Run the Flask app
-#  CMD ["gunicorn", "--bind", "0.0.0.0:8080", "server:app"]
+# Run the Flask app
+# CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:app"]

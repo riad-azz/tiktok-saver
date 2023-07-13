@@ -1,8 +1,20 @@
 from flask_cors import CORS
 
-CORS_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", "http://192.168.1.2:3000"]
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+FRONTEND_DOMAIN = os.environ.get("CORS_DOMAINS", None)
+
+if FRONTEND_DOMAIN:
+    CORS_ORIGINS = FRONTEND_DOMAIN.split(" ")
+else:
+    CORS_ORIGINS = "*"
+
+print(CORS_ORIGINS)
 
 cors = CORS(
-    methods=['GET', 'POST', 'PUT', 'DELETE'],
+    methods=['GET',],
     origins=CORS_ORIGINS,
 )

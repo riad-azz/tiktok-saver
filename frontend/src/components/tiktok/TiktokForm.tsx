@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { fetchVideoInfo } from "@/lib/tiktok";
-import { proxyApiURL } from "@/configs/config";
+import { proxyApiURL } from "@/configs/api";
 import { VideoInfo } from "@/types/tiktok";
 import { ErrorResponse } from "@/types";
 import { Icons } from "@/components/Icons";
