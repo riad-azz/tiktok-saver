@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { fetchVideoInfo } from "@/lib/tiktok/actions";
+import { fetchVideoInfo } from "@/lib/tiktok";
 import { proxyApiURL } from "@/configs/config";
 import { VideoInfo } from "@/types/tiktok";
 import { ErrorResponse } from "@/types";

@@ -1,5 +1,3 @@
-"use server";
-
 import { tiktokApiURL } from "@/configs/config";
 import { APIResponse, ErrorResponse } from "@/types";
 import { VideoInfo } from "@/types/tiktok";
@@ -8,9 +6,7 @@ export const fetchVideoInfo = async (videoUrl: string) => {
   let response;
 
   try {
-    response = await fetch(`${tiktokApiURL}?url=${videoUrl}`, {
-      method: "GET",
-    });
+    response = await fetch(`${tiktokApiURL}?url=${videoUrl}`);
   } catch (error: any) {
     console.log(error);
     console.log(error.message);

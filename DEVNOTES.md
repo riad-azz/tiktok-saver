@@ -19,14 +19,14 @@ python run.py
   ```
 
   ```bash
-  gunicorn --bind 0.0.0.0:8080 server:app
+  gunicorn --bind 0.0.0.0:5000 server:app
   ```
 
   - From the Dockerfile
 
   ```Dockerfile
   RUN pip install -U gunicorn
-  CMD ["gunicorn", "--bind", "0.0.0.0:8080", "server:app"]
+  CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:app"]
   ```
 
 ## Redis
