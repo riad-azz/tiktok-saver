@@ -1,6 +1,6 @@
 # Tiktok Saver - SaaS
 
-Download and save Tiktok videos with the highest quality and no watermark.
+TikTok Saver is a SaaS (Software as a service) for downloading and saving Tiktok videos with the highest quality and no watermark.
 
 ## About This Project
 
@@ -8,7 +8,7 @@ TikTok Saver is a SaaS (Software as a service) project that enables users to dow
 
 The whole point of this project is to be used as a SaaS. While you might want to add more security or tweak few things, the service is ready and works as intended for downloading tiktok videos.
 
-If there is anything you think can be improved or can be handled better, please let me know by creating a new issue or contact me on discord `Riad#1732` or the new naming `riad1732`.
+If there is anything you think can be improved or can be handled better or you face any issues, please let me know by creating a new issue or contact me on discord `Riad#1732` or the new naming `riad1732`.
 
 ## Website Preview
 
