@@ -40,23 +40,21 @@ cd tiktok-saver
 docker-compose up -d --build
 ```
 
-## Project Setup
-
-As i mentioned above you might want to add more security or tweak some stuff which i encourage you to do so that it fits your need. But other than that here is what you need to know:
-
-### Docker Compose
+## Docker Compose
 
 The `docker-compose.yml` is what holds the whole project together and links all the containers.
 
 You can tweak a lot of stuff here, like changing the `REDIS_PASSWORD`, changing `ports` or add more workers to the flask [gunicorn](https://gunicorn.org/) and other stuff, check out [docker compose docs](https://docs.docker.com/compose/) to learn more about it.
 
-### Backend Setup
+## Flask - Backend
 
 First thing you must do is go to `tiktok-saver/backend` and rename `.env.example` to `.env`.
 
 Here is what you need to know:
 
-**Rate limiting**: [flask-limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
+### Rate limiting
+
+[flask-limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
 
 - RATELIMIT_ENABLED : pretty straight forwards, this determines wether rate limiting is used or not.
 
@@ -64,19 +62,25 @@ Here is what you need to know:
 
 - RATELIMIT_REDIS_URL : you can set the URL of your redis here and there is no need to change it because its set up correctly with the `docker-compose.yml`, unless you want to change the password then change it in both the `.env` and in `docker-compose.yml`.
 
-**CORS**: [flask-cors](https://flask-cors.readthedocs.io/en/latest/) is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`::
+### Cross Origin Resource Sharing (CORS)
+
+[flask-cors](https://flask-cors.readthedocs.io/en/latest/) is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
 
 - CORS_DOMAINS : you can set all the domains that you would like to allow access to the backend API and separate them with a space, if you would like the API to be accessible from anywhere just set it to `"*"`.
 
-### Frontend Setup
+## Next.js - Frontend
 
 There isn't really much to change or setup except maybe for the domain and SSL but here is what you need to know:
 
-**SEO Optimization**: you can find all the SEO configs in the `frontend/src/configs` folder inside `seo.ts` and `site.ts` where you can tweak stuff like the website URL and name, also in `frontend/public/site.webmanifest`.
+### SEO Optimization
 
-**API Configs**: you can find the API configs in `frontend/src/configs/api.ts` where you can change the URL's but i do not recommend touching this unless you know what you are doing.
+you can find all the SEO configs in the `frontend/src/configs` folder inside `seo.ts` and `site.ts` where you can tweak stuff like the website URL and name, also in `frontend/public/site.webmanifest`.
 
-### Nginx
+### API Configs
+
+you can find the API configs in `frontend/src/configs/api.ts` where you can change the URL's but i do not recommend touching this unless you know what you are doing.
+
+## Nginx
 
 A High-performance web server & reverse proxy. Efficiently serves static files, proxies requests to Flask & Next.js apps, improves performance, handles high traffic, load balances, and enhances scalability.
 
