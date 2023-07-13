@@ -10,22 +10,13 @@ services:
 
   backend:
     build: ./backend
-    command: gunicorn --bind 0.0.0.0:8080 server:app
+    command: gunicorn --bind 0.0.0.0:5000 server:app
     ports:
-      - '8080:8080'
+      - '5000:5000'
     volumes:
       - './backend:/app/backend'
     depends_on:
       - redis
-    
-  nginx:
-    image: nginx:stable-alpine
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - backend
 
   frontend:
     build: ./frontend
@@ -34,5 +25,13 @@ services:
       - '3000:3000'
     volumes:
       - './frontend:/app/frontend'
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - nginx
+      - backend
+      - frontend

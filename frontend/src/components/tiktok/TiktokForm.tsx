@@ -88,6 +88,7 @@ const TiktokForm = () => {
         <input
           id="url-input"
           type="url"
+          disabled={isLoading}
           value={inputUrl}
           autoFocus={true}
           onChange={(e) => setInputUrl(e.target.value)}

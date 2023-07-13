@@ -1,3 +1,10 @@
-const baseApiURL = "http://127.0.0.1:8080/api";
+let baseApiURL: string;
+if (process.env.NODE_ENV === "production") {
+  // Change 127.0.0.1 to your domain
+  baseApiURL = "http://127.0.0.1/api";
+} else {
+  baseApiURL = "http://127.0.0.1:5000/api";
+}
+
 export const proxyApiURL = `${baseApiURL}/proxy/download`;
 export const tiktokApiURL = `${baseApiURL}/tiktok/info`;
