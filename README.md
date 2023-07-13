@@ -54,7 +54,7 @@ Here is what you need to know:
 
 ### Rate limiting
 
-[flask-limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
+[Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
 
 - RATELIMIT_ENABLED : pretty straight forwards, this determines wether rate limiting is used or not.
 
@@ -64,7 +64,7 @@ Here is what you need to know:
 
 ### Cross Origin Resource Sharing (CORS)
 
-[flask-cors](https://flask-cors.readthedocs.io/en/latest/) is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
+[Flask Cors](https://flask-cors.readthedocs.io/en/latest/) is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
 
 - CORS_DOMAINS : you can set all the domains that you would like to allow access to the backend API and separate them with a space, if you would like the API to be accessible from anywhere just set it to `"*"`.
 
