@@ -56,7 +56,7 @@ Here is what you need to know:
 
 [Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
 
-- RATELIMIT_ENABLED : pretty straight forwards, this determines wether rate limiting is used or not.
+- RATELIMIT_ENABLED : pretty straight forwards by setting this to `True` you enable rate limiting.
 
 - RATELIMIT_LIMIT : you can set the default rate limit for all routes here , check [flask-limiter docs](https://flask-limiter.readthedocs.io/en/stable/#quick-start) for more details.
 
