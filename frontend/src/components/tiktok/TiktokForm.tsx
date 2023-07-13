@@ -4,7 +4,8 @@ import { FormEvent, useState } from "react";
 import { fetchVideoInfo } from "@/lib/tiktok/actions";
 import { proxyApiURL } from "@/configs/config";
 import { VideoInfo } from "@/types/tiktok";
-import { APIResponse, ErrorResponse } from "@/types";
+import { ErrorResponse } from "@/types";
+import { Icons } from "@/components/Icons";
 
 const downloadVideo = async (videoInfo: VideoInfo) => {
   try {
@@ -73,37 +74,41 @@ const TiktokForm = () => {
       <h1 className="mb-8 text-center text-3xl font-bold md:text-5xl">
         Tiktok Saver
       </h1>
-      {errorMsg !== "" && (
-        <div className="mx-4 mb-1 w-full rounded bg-gray-300/50 p-2 px-4 text-red-500 md:max-w-2xl">
-          {errorMsg}
-        </div>
-      )}
       <form
-        className="flex w-full flex-col items-center gap-4 px-4 md:relative md:max-w-2xl md:flex-row md:px-0"
+        className="flex w-full flex-col items-center gap-2 px-4 md:px-0"
         onSubmit={handleSubmit}
       >
-        <label htmlFor="url-input" className="sr-only">
-          Enter desired URL
-        </label>
-        <input
-          id="url-input"
-          type="url"
-          disabled={isLoading}
-          value={inputUrl}
-          autoFocus={true}
-          onChange={(e) => setInputUrl(e.target.value)}
-          placeholder="Paste Tiktok link here..."
-          aria-label="video download URL input"
-          title="video download URL input"
-          className="w-full rounded border border-purple-600 bg-gray-100 px-2 py-4 text-gray-700 placeholder-gray-400/80 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white shadow-md md:absolute md:right-2 md:w-fit"
-        >
-          {isLoading ? "Fetching..." : "Download"}
-        </button>
+        {errorMsg !== "" && (
+          <div className="flex w-full items-center gap-2 border-l-4 border-l-red-500 bg-white p-2 text-red-500 md:max-w-2xl">
+            <Icons.error />
+            {errorMsg}
+          </div>
+        )}
+        <div className="flex w-full flex-col items-center gap-4  md:relative md:max-w-2xl md:flex-row md:px-0">
+          <label htmlFor="url-input" className="sr-only">
+            Enter desired URL
+          </label>
+          <input
+            id="url-input"
+            type="url"
+            disabled={isLoading}
+            value={inputUrl}
+            autoFocus={true}
+            onChange={(e) => setInputUrl(e.target.value)}
+            placeholder="Paste Tiktok link here..."
+            aria-label="video download URL input"
+            title="video download URL input"
+            className="w-full rounded border border-purple-600 bg-gray-100 px-2 py-4 text-gray-700 placeholder-gray-400/80 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white shadow-md md:absolute md:right-2 md:w-fit"
+          >
+            {isLoading ? "Fetching..." : "Download"}
+          </button>
+        </div>
       </form>
     </div>
   );
