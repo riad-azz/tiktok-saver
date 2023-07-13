@@ -10,19 +10,17 @@ The whole point of this project is to be used as a SaaS. While you might want to
 
 If there is anything you think can be improved or can be handled better, please let me know by creating a new issue or contact me on discord `Riad#1732` or the new naming `riad1732`.
 
-## Preview
+## Website Preview
 
-### Desktop Preview
+### On Desktop
 
 ![desktop preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/desktop-preview.png?raw=true)
 
-### Mobile Preview
+### On Mobile
 
 ![mobile preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/mobile-preview.png?raw=true)
 
-## Getting Started
-
-### Running the project
+## Running the project
 
 **1.** Install the latest [Docker](https://www.docker.com/) version.
 
@@ -46,6 +44,12 @@ docker-compose up -d --build
 
 As i mentioned above you might want to add more security or tweak some stuff which i encourage you to do so that it fits your need. But other than that here is what you need to know:
 
+### Docker Compose
+
+The `docker-compose.yml` is what holds the whole project together and links all the containers.
+
+You can tweak a lot of stuff here, like changing the `REDIS_PASSWORD`, changing `ports` or add more workers to the flask [gunicorn](https://gunicorn.org/) and other stuff, check out [docker compose docs](https://docs.docker.com/compose/) to learn more about it.
+
 ### Backend Setup
 
 First thing you must do is go to `tiktok-saver/backend` and rename `.env.example` to `.env`.
@@ -66,7 +70,7 @@ Here is what you need to know:
 
 ### Frontend Setup
 
-There isn't really much to change or setup but here is what you need to know:
+There isn't really much to change or setup except maybe for the domain and SSL but here is what you need to know:
 
 **SEO Optimization**: you can find all the SEO configs in the `frontend/src/configs` folder inside `seo.ts` and `site.ts` where you can tweak stuff like the website URL and name, also in `frontend/public/site.webmanifest`.
 
@@ -76,13 +80,11 @@ There isn't really much to change or setup but here is what you need to know:
 
 A High-performance web server & reverse proxy. Efficiently serves static files, proxies requests to Flask & Next.js apps, improves performance, handles high traffic, load balances, and enhances scalability.
 
-You can tweak the Nginx settings in `tiktok-saver/nginx/nginx.conf`, check out [nginx docs](https://docs.nginx.com/) to learn more.
+You can tweak the Nginx settings in `tiktok-saver/nginx/nginx.conf` and add stuff like SSL Certificate (HTTPS) or add your domain, check out [nginx docs](https://docs.nginx.com/) to learn more.
 
-### Docker Compose
+## Contribution
 
-The `docker-compose.yml` is what holds the whole project together and links all the containers.
-
-You can tweak a lot of stuff here, like changing the `REDIS_PASSWORD`, changing `ports` or add more workers to the flask [gunicorn](https://gunicorn.org/) and other stuff, check out [docker compose docs](https://docs.docker.com/compose/) to learn more about it.
+All contribution is welcome, if you think you can improve the project In any way, shape or form please feel free to do so.
 
 ## License
 
