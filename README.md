@@ -24,13 +24,13 @@ If there is anything you think can be improved or can be handled better, please 
 
 **1.** Install the latest [Docker](https://www.docker.com/) version.
 
-**2.** Cloning the repository:
+**2.** Clone the repository:
 
 ```bash
 git clone https://github.com/riad-azz/tiktok-saver.git
 ```
 
-**3.** Starting the server:
+**3.** Start the server:
 
 ```bash
 cd tiktok-saver
@@ -54,7 +54,7 @@ Here is what you need to know:
 
 ### Rate limiting
 
-[Flask Limiter](https://flask-limiter.readthedocs.io/en/stable/) is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
+Flask Limiter is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
 
 - RATELIMIT_ENABLED : pretty straight forwards by setting this to `True` you enable rate limiting.
 
@@ -62,11 +62,15 @@ Here is what you need to know:
 
 - RATELIMIT_REDIS_URL : you can set the URL of your redis here and there is no need to change it because its set up correctly with the `docker-compose.yml`, unless you want to change the password then change it in both the `.env` and in `docker-compose.yml`.
 
+Check out [Flask Limiter Docs](https://flask-limiter.readthedocs.io/en/stable/) to learn more.
+
 ### Cross Origin Resource Sharing (CORS)
 
-[Flask Cors](https://flask-cors.readthedocs.io/en/latest/) is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
+Flask Cors is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
 
 - CORS_DOMAINS : you can set all the domains that you would like to allow access to the backend API and separate them with a space, if you would like the API to be accessible from anywhere just set it to `"*"`.
+
+Check out [Flask Cors Docs](https://flask-cors.readthedocs.io/en/latest/) to learn more.
 
 ## Next.js - Frontend
 
