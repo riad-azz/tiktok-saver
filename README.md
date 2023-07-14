@@ -1,14 +1,14 @@
 # Tiktok Saver - SaaS
 
-TikTok Saver is a SaaS (Software as a service) for downloading and saving Tiktok videos with the highest quality and no watermark.
+TikTok Saver is a Software as a Service (SaaS) application that allows users to download and save TikTok videos without watermarks and in the highest quality.
 
 ## About This Project
 
-TikTok Saver is a SaaS (Software as a service) project that enables users to download and save TikTok videos on their devices _(slides are not supported)_. It uses Python with [yt-dlp](https://github.com/yt-dlp/yt-dlp) as the backend and Next.js as the frontend framework.
+TikTok Saver is a SaaS project that enables users to download and save TikTok videos on their devices. Please note that slides are not supported. The backend of the application is built using Python with [yt-dlp](https://github.com/yt-dlp/yt-dlp), while the frontend is developed using the Next.js framework.
 
-The whole point of this project is to be used as a SaaS. While you might want to add more security or tweak few things, the service is ready and works as intended for downloading tiktok videos.
+The purpose of this project is to provide a ready-to-use SaaS solution for downloading TikTok videos. While you can make security enhancements or make other tweaks, the service is already functional and works as intended for downloading TikTok videos.
 
-If there is anything you think can be improved or can be handled better or you face any issues, please let me know by creating a new issue or contact me on discord `Riad#1732` or the new naming `riad1732`.
+If you have any suggestions for improvements, better handling of certain aspects, or if you encounter any issues, please let me know by creating a new issue or contacting me on Discord (`Riad#1732`) or using the new naming (`riad1732`).
 
 ## Website Preview
 
@@ -20,9 +20,9 @@ If there is anything you think can be improved or can be handled better or you f
 
 ![mobile preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/mobile-preview.png?raw=true)
 
-## Running the project
+## Getting Started
 
-**1.** Install the latest [Docker](https://www.docker.com/) version.
+**1.** Install the latest version of [Docker](https://www.docker.com/).
 
 **2.** Clone the repository:
 
@@ -40,59 +40,57 @@ cd tiktok-saver
 docker-compose up -d --build
 ```
 
-## Docker Compose
+Note: make sure Docker is running before using `docker-compose` command.
 
-The `docker-compose.yml` is what holds the whole project together and links all the containers.
+## Project Setup
 
-You can tweak a lot of stuff here, like changing the `REDIS_PASSWORD`, changing `ports` or add more workers to the flask [gunicorn](https://gunicorn.org/) and other stuff, check out [docker compose docs](https://docs.docker.com/compose/) to learn more about it.
+### Docker Compose
 
-## Flask - Backend
+The `tiktok-saver/docker-compose.yml` file is responsible for connecting and managing all the containers in the project.
+
+You can customize various aspects here, such as changing the `REDIS_PASSWORD`, modifying ports, or adding more workers to the Flask gunicorn server. For more information, refer to the [Docker Compose documentation](https://docs.docker.com/compose/).
+
+### Flask - Backend
 
 First thing you must do is go to `tiktok-saver/backend` and rename `.env.example` to `.env`.
 
 Here is what you need to know:
 
-### Rate limiting
+**Rate limiting**: Flask Limiter is used for rate limiting. You can customize it in `backend/app/extensions/limiter.py`. The main settings in `.env` are as follows:
 
-Flask Limiter is used for rate limiting, you can customize it to your liking in `backend/app/extensions/limiter.py` as for the main settings in `.env`:
+- `RATELIMIT_ENABLED` : Setting this to `True` enables rate limiting.
 
-- RATELIMIT_ENABLED : pretty straight forwards by setting this to `True` you enable rate limiting.
+- `RATELIMIT_LIMIT` : You can set the default rate limit for all routes. Check the Flask Limiter documentation for more details.
 
-- RATELIMIT_LIMIT : you can set the default rate limit for all routes here , check [flask-limiter docs](https://flask-limiter.readthedocs.io/en/stable/#quick-start) for more details.
+- `RATELIMIT_REDIS_URL` : This sets the URL of your Redis instance. It is already correctly configured with the `docker-compose.yml`. Only change it if you want to modify the password, in which case, update it in both the `.env` file and `docker-compose.yml`.
 
-- RATELIMIT_REDIS_URL : you can set the URL of your redis here and there is no need to change it because its set up correctly with the `docker-compose.yml`, unless you want to change the password then change it in both the `.env` and in `docker-compose.yml`.
+Refer to the [Flask Limiter documentation](https://flask-limiter.readthedocs.io/en/stable/) for further information.
 
-Check out [Flask Limiter Docs](https://flask-limiter.readthedocs.io/en/stable/) to learn more.
+**Cross Origin Resource Sharing (CORS)**: Flask Cors is used for Cross Origin Resource Sharing (CORS). You can customize it in `backend/app/extensions/cors.py`. The main setting in `.env` is:
 
-### Cross Origin Resource Sharing (CORS)
+- `CORS_DOMAINS` : You can set the domains that are allowed to access the backend API. Separate multiple domains with a space. If you want the API to be accessible from anywhere, set it to `"*"`.
 
-Flask Cors is used for Cross Origin Resource Sharing (CORS), you can customize it to your liking in `backend/app/extensions/cors.py` as for the main settings in `.env`:
+Refer to the [Flask Cors documentation](https://flask-cors.readthedocs.io/en/latest/) for further information.
 
-- CORS_DOMAINS : you can set all the domains that you would like to allow access to the backend API and separate them with a space, if you would like the API to be accessible from anywhere just set it to `"*"`.
+### Next.js - Frontend
 
-Check out [Flask Cors Docs](https://flask-cors.readthedocs.io/en/latest/) to learn more.
+There isn't much to change or set up here. Here's what you need to know:
 
-## Next.js - Frontend
+**SEO Optimization**: You can find all the SEO configurations in the `frontend/src/configs` folder, specifically in `seo.ts` and `site.ts`. You can adjust settings such as the website URL, name.
 
-There isn't really much to change or setup except maybe for the domain and SSL but here is what you need to know:
+**API Configs**: The API configurations can be found in `frontend/src/configs/api.ts`. Only modify these settings if you know what you are doing.
 
-### SEO Optimization
+### Nginx
 
-you can find all the SEO configs in the `frontend/src/configs` folder inside `seo.ts` and `site.ts` where you can tweak stuff like the website URL and name, also in `frontend/public/site.webmanifest`.
+Nginx is a high-performance web server and reverse proxy that efficiently serves static files, proxies requests to Flask and Next.js apps, improves performance, handles high traffic, load balances, and enhances scalability.
 
-### API Configs
+You can customize Nginx settings in `tiktok-saver/nginx/nginx.conf`.
 
-you can find the API configs in `frontend/src/configs/api.ts` where you can change the URL's but i do not recommend touching this unless you know what you are doing.
-
-## Nginx
-
-A High-performance web server & reverse proxy. Efficiently serves static files, proxies requests to Flask & Next.js apps, improves performance, handles high traffic, load balances, and enhances scalability.
-
-You can tweak the Nginx settings in `tiktok-saver/nginx/nginx.conf` and add stuff like SSL Certificate (HTTPS) or add your domain, check out [nginx docs](https://docs.nginx.com/) to learn more.
+For more information, refer to the [Nginx documentation](https://docs.nginx.com/).
 
 ## Contribution
 
-All contribution is welcome, if you think you can improve the project In any way, shape or form please feel free to do so.
+All contributions are welcome! If you believe you can improve this project in any way, shape, or form, please feel free to do so.
 
 ## License
 
