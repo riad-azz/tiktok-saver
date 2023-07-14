@@ -1,6 +1,8 @@
 import time
+from app.models.tiktok import VideoInfo
 
-def format_post_json(post: dict):
+
+def format_post_json(post: dict) -> VideoInfo | None:
     post_type = post.get("_type", None)
     if post_type != "video":
         return None
@@ -23,25 +25,20 @@ def format_post_json(post: dict):
 
     if not video_format:
         return None
-    
+
     timestamp = str(int(time.time()))
     filename = f"tiktok-saver-{timestamp}.mp4"
 
     video_description = post.get("description", "No description")
-    video_duration = post.get("duration", "")
-    video_link = video_format.get("url", "")
+    video_duration = post.get("duration", 0)
+    video_link = video_format.get("url", None)
     video_thumbnail = post.get("thumbnail", "")
 
-    video = {
-        "filename": filename,
-        "is_watermarked": is_watermarked,
-        "duration": video_duration,
-        "description": video_description,
-        "video_link": video_link,
-        "thumbnail": video_thumbnail,
-    }
+    video_info = VideoInfo(filename=filename, is_watermarked=is_watermarked,
+                           duration=video_duration, description=video_description,
+                           video_link=video_link, thumbnail=video_thumbnail)
 
-    return video
+    return video_info
 
 
 def format_video_info(data: dict):

@@ -12,9 +12,7 @@ if FRONTEND_DOMAIN:
 else:
     CORS_ORIGINS = "*"
 
-print(CORS_ORIGINS)
-
 cors = CORS(
-    methods=['GET',],
+    methods=['GET', ],
     origins=CORS_ORIGINS,
 )

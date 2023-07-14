@@ -39,4 +39,6 @@ def video_info_api():
 
     if video_info is None:
         raise BadRequest("Unable to extract video URL, please make sure this post contains a video")
-    return json_response(video_info, 200)
+
+    serialized_data = video_info.to_dict()
+    return json_response(serialized_data, 200)
