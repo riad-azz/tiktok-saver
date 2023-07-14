@@ -17,18 +17,18 @@ tiktok_bp = Blueprint("tiktok", __name__, url_prefix="/tiktok")
 def video_info_api():
     video_url = request.args.get("url")
     if not video_url:
-        raise BadRequest("Bad Request, missing params")
+        raise BadRequest("Bad Request, missing params.")
 
     # Validate user input
     is_valid_url = is_valid_tiktok_domain(video_url)
     if not is_valid_url:
-        raise BadRequest("Invalid Tiktok URL")
+        raise BadRequest("Invalid Tiktok URL, please enter a valid post URL.")
 
     # Fetch video data from tiktok
     try:
         data = get_video_info(video_url)
     except:
-        raise InternalServerError("Unable to extract video url")
+        raise InternalServerError("Invalid Tiktok post URL, could not find video URL.")
 
     # Format and clean data to be served to our frontend
     try:
@@ -38,7 +38,7 @@ def video_info_api():
         raise InternalServerError("Internal Server Error")
 
     if video_info is None:
-        raise BadRequest("Unable to extract video URL, please make sure this post contains a video")
+        raise BadRequest("Could not find video URL, please contact the support if this problem persists.")
 
     serialized_data = video_info.to_dict()
     return json_response(serialized_data, 200)

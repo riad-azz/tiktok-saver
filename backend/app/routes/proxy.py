@@ -32,7 +32,7 @@ def proxy_file_api():
         headers = response.headers
 
         if headers.get("Content-type") != "video/mp4":
-            raise BadRequest("Invalid file type, only videos are allowed")
+            raise BadRequest("Invalid file type, only videos are allowed.")
 
         # Set the content disposition header for the downloaded file
         timestamp = str(int(time.time()))

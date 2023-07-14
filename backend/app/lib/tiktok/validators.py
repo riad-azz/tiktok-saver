@@ -6,4 +6,4 @@ def is_valid_tiktok_domain(url: str):
         "https://vm.tiktok.com/"
     ]
 
-    return any(url.startswith(x) for x in allowed_domains)
+    return any(url.startswith(x) and len(url) > len(x) for x in allowed_domains)

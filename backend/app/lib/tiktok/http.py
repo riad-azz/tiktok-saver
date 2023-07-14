@@ -10,10 +10,10 @@ def get_video_info(video_url: str) -> dict | None:
         json_data = output.decode("utf-8").strip()
         return json.loads(json_data)
     except subprocess.CalledProcessError:
-        print("Unable to extract video url")
+        print(f"Unable to extract video url for : {video_url}")
     except json.JSONDecodeError as e:
-        print(f"Error while decoding video JSON: {e}")
+        print(f"Error while decoding {video_url} video JSON: {e}")
     except Exception as e:
-        print(f"An error occurred while fetching video Json: {e}")
+        print(f"An error occurred while fetching {video_url} video Json: {e}")
 
     raise None

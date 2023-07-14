@@ -1,20 +1,22 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { fetchVideoInfo } from "@/lib/tiktok";
-import { proxyApiURL } from "@/configs/api";
+import { proxyApiURL, tiktokApiURL } from "@/configs/api";
 import { VideoInfo } from "@/types/tiktok";
 import { ErrorResponse } from "@/types";
 import { Icons } from "@/components/Icons";
+import { isJsonResponse, makeApiRequest } from "@/lib/utils";
+import { validateTiktokUrl } from "@/lib/tiktok/validators";
+import { ClientException } from "@/exceptions";
 
-const downloadVideo = async (videoInfo: VideoInfo) => {
+async function downloadVideo(videoInfo: VideoInfo) {
   try {
     const encodedUrl = encodeURIComponent(videoInfo.video_link);
     const response = await fetch(`${proxyApiURL}?url=${encodedUrl}`);
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
+    const isJson = isJsonResponse(response);
+    if (isJson) {
       const json: ErrorResponse = await response.json();
-      throw new Error(json.message);
+      throw new ClientException(json.message);
     }
     const blob = await response.blob();
     const blobUrl = URL.createObjectURL(blob);
@@ -35,15 +37,22 @@ const downloadVideo = async (videoInfo: VideoInfo) => {
     a.click();
     a.remove();
   }
-};
+}
 
 const TiktokForm = () => {
-  const [inputUrl, setInputUrl] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [inputUrl, setInputUrl] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function handleError(error: any) {
-    setErrorMsg(error.message);
+    if (error instanceof ClientException) {
+      setErrorMsg(error.message);
+    } else {
+      console.error(error);
+      setErrorMsg(
+        "Something went wrong, if this problem persists contact the support."
+      );
+    }
     setIsLoading(false);
   }
 
@@ -53,15 +62,25 @@ const TiktokForm = () => {
     setErrorMsg("");
 
     try {
-      const response = await fetchVideoInfo(inputUrl);
+      validateTiktokUrl(inputUrl);
+    } catch (error) {
+      return handleError(error);
+    }
+
+    try {
+      const requestArgs = {
+        url: `${tiktokApiURL}?url=${inputUrl}`,
+        fetchError: "API service is down, please try again later.",
+        responseError: "Bad response from the API, please try again.",
+      };
+      const response = await makeApiRequest<VideoInfo>(requestArgs);
 
       if (response.status === "error") {
-        throw new Error(response.message);
+        throw new ClientException(response.message);
       }
 
       const videoInfo = response.data;
       await downloadVideo(videoInfo);
-      setErrorMsg("");
     } catch (error: any) {
       return handleError(error);
     }
@@ -93,6 +112,7 @@ const TiktokForm = () => {
             type="url"
             disabled={isLoading}
             value={inputUrl}
+            autoComplete={isLoading ? "off" : "on"}
             autoFocus={true}
             onChange={(e) => setInputUrl(e.target.value)}
             placeholder="Paste Tiktok link here..."
@@ -106,7 +126,17 @@ const TiktokForm = () => {
             disabled={isLoading}
             className="w-full rounded border bg-gradient-to-r from-purple-400 to-blue-600 px-2 py-3 text-white shadow-md md:absolute md:right-2 md:w-fit"
           >
-            {isLoading ? "Fetching..." : "Download"}
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Icons.loading />
+                <span>Fetching</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-2">
+                <Icons.download />
+                <span>Download</span>
+              </div>
+            )}
           </button>
         </div>
       </form>
