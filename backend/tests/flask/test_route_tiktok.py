@@ -15,24 +15,27 @@ def app():
 
 def test_tiktok_api(app):
     with app.test_client() as client:
-        response = client.get(f'/api/tiktok/info?url={VIDEO_POST_URL}')
+        response = client.get(f"/api/tiktok/info?url={VIDEO_POST_URL}")
         assert response.status_code == 200
-        assert response.headers['Content-Type'] == 'application/json'
+        assert response.headers["Content-Type"] == "application/json"
 
 
 def test_tiktok_api_invalid_post(app):
     with app.test_client() as client:
-        response = client.get(f'/api/tiktok/info?url={SLIDES_POST_URL}')
+        response = client.get(f"/api/tiktok/info?url={SLIDES_POST_URL}")
         assert response.status_code == 400
-        assert response.headers['Content-Type'] == 'application/json'
+        assert response.headers["Content-Type"] == "application/json"
         assert response.json["status"] == "error"
-        assert response.json["message"] == "Unable to extract video URL, please make sure this post contains a video"
+        assert response.json["message"] == "Could not find video URL for this post."
 
 
 def test_tiktok_api_invalid_url(app):
     with app.test_client() as client:
-        response = client.get(f'/api/tiktok/info?url={INVALID_URL}')
+        response = client.get(f"/api/tiktok/info?url={INVALID_URL}")
         assert response.status_code == 400
-        assert response.headers['Content-Type'] == 'application/json'
+        assert response.headers["Content-Type"] == "application/json"
         assert response.json["status"] == "error"
-        assert response.json["message"] == "Invalid Tiktok URL"
+        assert (
+            response.json["message"]
+            == "Invalid Tiktok URL, please enter a valid post URL."
+        )

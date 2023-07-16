@@ -20,11 +20,13 @@ def default_exempt_when():
 
 limiter = Limiter(
     key_func=get_remote_address,
-    default_limits=[RATELIMIT_LIMIT, ],
+    default_limits=[
+        RATELIMIT_LIMIT,
+    ],
     storage_uri=RATELIMIT_STORAGE_URL,
     in_memory_fallback_enabled=True,
     strategy="moving-window",  # or "fixed-window"
     headers_enabled=True,
     enabled=RATELIMIT_ENABLED,
-    default_limits_exempt_when=default_exempt_when,
+    # default_limits_exempt_when=default_exempt_when,
 )

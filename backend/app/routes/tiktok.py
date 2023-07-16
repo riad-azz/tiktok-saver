@@ -28,17 +28,17 @@ def video_info_api():
     try:
         data = get_video_info(video_url)
     except:
-        raise InternalServerError("Invalid Tiktok post URL, could not find video URL.")
+        raise InternalServerError("Could not find video URL for this post.")
 
     # Format and clean data to be served to our frontend
     try:
         video_info = format_video_info(data)
     except Exception as e:
         print(f"Problem formatting json for {video_url}\nerror: {e}")
-        raise InternalServerError("Internal Server Error")
+        raise InternalServerError("Something went wrong, please try again.")
 
     if video_info is None:
-        raise BadRequest("Could not find video URL, please contact the support if this problem persists.")
+        raise BadRequest("Could not find video URL for this post.")
 
     serialized_data = video_info.to_dict()
     return json_response(serialized_data, 200)
