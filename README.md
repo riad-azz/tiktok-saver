@@ -12,32 +12,36 @@ If you have any suggestions for improvements, better handling of certain aspects
 
 ## Website Preview
 
-### On Desktop
+This is the website preview on desktop and mobile:
 
-![desktop preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/desktop-preview.png?raw=true)
-
-### On Mobile
-
-![mobile preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/mobile-preview.png?raw=true)
+![website preview](https://github.com/riad-azz/readme-storage/blob/main/tiktok-saver/website-preview.png?raw=true)
 
 ## Getting Started
 
-**1.** Install the latest version of [Docker](https://www.docker.com/).
+Install the latest version of [Docker](https://www.docker.com/) then follow these steps:
 
-**2.** Clone the repository:
+**1.** Clone the repository:
 
 ```bash
 git clone https://github.com/riad-azz/tiktok-saver.git
 ```
 
-**3.** Start the server:
+**2.** Navigate to the project folder:
 
 ```bash
 cd tiktok-saver
 ```
 
+**3.** Starting the server:
+
+Run this command for the first build:
+
 ```bash
+# Build and run the server
 docker-compose up -d --build
+
+# Run the server
+docker-compose up -d
 ```
 
 Note: make sure Docker is installed and running before using `docker-compose` command.
