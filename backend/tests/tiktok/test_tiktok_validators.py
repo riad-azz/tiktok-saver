@@ -1,5 +1,5 @@
 # Local modules
-from app.lib.tiktok import is_valid_tiktok_domain
+from app.utils.tiktok import is_valid_tiktok_domain
 
 
 def test_valid_tiktok_url():

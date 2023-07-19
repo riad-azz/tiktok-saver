@@ -1,5 +1,5 @@
 # Local modules
-from app.lib.proxy import is_allowed_proxy_domain
+from app.utils.proxy import is_allowed_proxy_domain
 
 
 def test_valid_proxy_domain():

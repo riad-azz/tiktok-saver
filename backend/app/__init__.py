@@ -1,16 +1,18 @@
+# Flask modules
 from flask import Flask
 
+# Local modules
 from app.routes import api_bp
 from app.extensions import cors, limiter
-from app.utils.flask import error_response
 from app.config import DevConfig, ProdConfig
-
-from werkzeug.exceptions import HTTPException
 
 
 def create_app(debug: bool = False):
     # Create the Flask application instance
     app = Flask(__name__)
+
+    # Set current_app context
+    app.app_context().push()
 
     if debug:
         app.config.from_object(DevConfig)
@@ -23,20 +25,5 @@ def create_app(debug: bool = False):
 
     # Register blueprints or routes
     app.register_blueprint(api_bp)
-
-    # Global error handler
-    @app.errorhandler(Exception)
-    def handle_error(error):
-        if isinstance(error, HTTPException):
-            default_message = type(error).description
-            if default_message != error.description:
-                return error_response(error.description, error.code)
-            else:
-                return error
-        else:
-            return error_response()
-
-    # Set current_app context
-    app.app_context().push()
 
     return app

@@ -2,10 +2,10 @@
 from flask import Response
 
 # Local modules
-from app.models.api import SuccessResponse, ErrorResponse
+from app.utils.models import SuccessResponse, ErrorResponse
 
 
-def json_response(data, status: int = 200):
+def success_response(data, status: int = 200):
     response_data = SuccessResponse(data=data)
     serialized_data = response_data.to_json()
     response = Response(serialized_data, mimetype="application/json")
