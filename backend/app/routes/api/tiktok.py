@@ -5,10 +5,10 @@ from flask import Blueprint, request
 from werkzeug.exceptions import BadRequest, InternalServerError
 
 # Local modules
-from app.utils.flask import json_response
-from app.lib.tiktok import get_video_info
-from app.lib.tiktok import is_valid_tiktok_domain
-from app.lib.tiktok import format_video_info
+from app.utils.api import success_response
+from app.utils.tiktok import get_video_info
+from app.utils.tiktok import is_valid_tiktok_domain
+from app.utils.tiktok import format_video_info
 
 tiktok_bp = Blueprint("tiktok", __name__, url_prefix="/tiktok")
 
@@ -34,11 +34,12 @@ def video_info_api():
     try:
         video_info = format_video_info(data)
     except Exception as e:
-        print(f"Problem formatting json for {video_url}\nerror: {e}")
+        print(f"Problem formatting json for {video_url}\n"
+              f"error: {e}")
         raise InternalServerError("Something went wrong, please try again.")
 
     if video_info is None:
         raise BadRequest("Could not find video URL for this post.")
 
     serialized_data = video_info.to_dict()
-    return json_response(serialized_data, 200)
+    return success_response(serialized_data, 200)

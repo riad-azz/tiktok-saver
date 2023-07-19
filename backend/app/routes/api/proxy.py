@@ -1,14 +1,14 @@
 # Flask modules
 from flask import Blueprint, Response, request, stream_with_context
+from werkzeug.exceptions import BadRequest, Unauthorized, InternalServerError
 
 # Other modules
 import time
 import requests
 import urllib.parse
-from werkzeug.exceptions import BadRequest, Unauthorized, InternalServerError
 
 # Local modules
-from app.lib.proxy import is_allowed_proxy_domain
+from app.utils.proxy import is_allowed_proxy_domain
 
 proxy_bp = Blueprint("proxy", __name__, url_prefix="/proxy")
 
