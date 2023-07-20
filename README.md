@@ -8,7 +8,7 @@ TikTok Saver is a SaaS project that enables users to download and save TikTok vi
 
 The purpose of this project is to provide a ready-to-use SaaS solution for downloading TikTok videos. While you can make security enhancements or make other tweaks, the service is already functional and works as intended for downloading TikTok videos.
 
-If you have any suggestions for improvements, better handling of certain aspects, or if you encounter any issues, please let me know by creating a new issue or contacting me on Discord (`Riad#1732`) or using the new naming (`riad1732`).
+If you have any suggestions for improvements, better handling of certain aspects, or if you encounter any issues, please let me know by creating a new issue or contacting me on Discord `_riad_`.
 
 ## Website Preview
 
