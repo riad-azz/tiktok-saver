@@ -25,4 +25,5 @@ def test_api_cache(app):
     request = response.request
     cache_key = make_cache_key(request)
     is_cached = get_cached_response(cache_key)
+
     assert bool(is_cached) is True
