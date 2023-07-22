@@ -11,7 +11,7 @@ tests_bp = Blueprint("tests", __name__, url_prefix="/tests")
 
 @tests_bp.before_request
 def limit_tests_route_access():
-    ALLOWED_HOSTS = ("127.0.0.1", "::1", "192.168.1.2", "localhost")
+    ALLOWED_HOSTS = ("127.0.0.1", "::1", "localhost")
     if request.remote_addr not in ALLOWED_HOSTS:
         raise Forbidden()
 

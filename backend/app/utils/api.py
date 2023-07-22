@@ -1,15 +1,16 @@
 # Flask modules
-from flask import Response, request
+from flask import Response
+from flask.wrappers import Request
 
 # Local modules
 from app.extensions import cache
 from app.utils.models import SuccessResponse, ErrorResponse
 
 
-def make_cache_key():
+def make_cache_key(request: Request):
     full_url = request.url
-    api_cache_url = full_url.split("/api/")[-1]
-    return api_cache_url
+    api_cache_key = full_url.split("/api/")[-1]
+    return api_cache_key
 
 
 def get_cached_response(cache_key: str):
