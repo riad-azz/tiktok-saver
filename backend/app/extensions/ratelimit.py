@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-RATELIMIT_ENABLED = os.getenv("RATELIMIT_ENABLED", "False") == "True"
-RATELIMIT_LIMIT = os.getenv("RATELIMIT_LIMIT", "5/minute")
-RATELIMIT_STORAGE_URL = os.getenv("RATELIMIT_STORAGE_URL", "memory://")
+RATELIMIT_ENABLED = os.environ.get("RATELIMIT_ENABLED", "False") == "True"
+RATELIMIT_LIMIT = os.environ.get("RATELIMIT_LIMIT", "5/minute")
+RATELIMIT_STORAGE_URL = os.environ.get("RATELIMIT_STORAGE_URL", "memory://")
 
 
 def default_exempt_when():
