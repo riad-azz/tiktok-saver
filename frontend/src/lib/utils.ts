@@ -1,4 +1,6 @@
-import { APIResponse, ErrorResponse } from "@/types";
+import { APIResponse, ErrorResponse, SuccessResponse } from "@/types";
+import { VideoInfo } from "@/types/tiktok";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
 export const isJsonResponse = (response: Response) => {
   const contentType = response.headers.get("content-type");
@@ -13,31 +15,35 @@ export const makeErrorResponse = (message = "Something went wrong.") => {
   return response;
 };
 
-type ApiRequestArgs = {
-  url: string;
-  fetchError?: string;
-  responseError?: string;
-};
-
-export const makeApiRequest = async <T>({
-  url,
-  fetchError = "Could not connect to the server.",
-  responseError = "Bad response from the server.",
-}: ApiRequestArgs): Promise<APIResponse<T>> => {
-  let response;
-
+export const makeHttpRequest = async <T>(
+  url: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET",
+  data: any = null,
+  headers: { [key: string]: string } = {},
+  timeout: number = 0
+): Promise<APIResponse<T>> => {
   try {
-    response = await fetch(url);
+    const response: AxiosResponse = await axios({
+      url: url,
+      method: method || "GET",
+      data: data,
+      headers: headers,
+      timeout: timeout,
+    });
+
+    const successResponse = response.data as SuccessResponse<T>;
+    return successResponse;
   } catch (error: any) {
-    console.log(error);
-    return makeErrorResponse(fetchError);
+    const axiosError: AxiosError = error;
+    if (axiosError.response) {
+      const response = axiosError.response.data as ErrorResponse;
+      return makeErrorResponse(response.message);
+    } else if (axiosError.request) {
+      console.error("Request Error:", axiosError.request);
+      return makeErrorResponse("Request timeout, please and try again.");
+    } else {
+      console.error("Error:", axiosError.message);
+      return makeErrorResponse("Something went wrong, please try again.");
+    }
   }
-
-  const isJson = isJsonResponse(response);
-  if (!isJson) {
-    return makeErrorResponse(responseError);
-  }
-
-  const apiResponse: APIResponse<T> = await response.json();
-  return apiResponse;
 };

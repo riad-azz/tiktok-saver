@@ -3,7 +3,7 @@ from flask import Flask
 
 # Local modules
 from app.routes import api_bp
-from app.extensions import cors, limiter
+from app.extensions import cors, cache, limiter
 from app.config import DevConfig, ProdConfig
 
 
@@ -21,6 +21,7 @@ def create_app(debug: bool = False):
 
     # Initialize extensions
     cors.init_app(app)
+    cache.init_app(app)
     limiter.init_app(app)
 
     # Register blueprints or routes

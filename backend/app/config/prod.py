@@ -7,4 +7,4 @@ load_dotenv()
 class ProdConfig:
     TESTING = False
     DEBUG = False
-    SECRET_KEY = os.environ.get("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")

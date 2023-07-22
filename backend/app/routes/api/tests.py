@@ -9,16 +9,22 @@ from app.utils.api import success_response
 tests_bp = Blueprint("tests", __name__, url_prefix="/tests")
 
 
-@tests_bp.before_request
-def limit_tests_route_access():
-    ALLOWED_HOSTS = ("127.0.0.1", "::1")
-    if request.remote_addr not in ALLOWED_HOSTS:
-        raise Forbidden()
+# @tests_bp.before_request
+# def limit_tests_route_access():
+#     ALLOWED_HOSTS = ("127.0.0.1", "::1", "192.168.1.2", "localhost")
+#     if request.remote_addr not in ALLOWED_HOSTS:
+#         raise Forbidden()
 
 
 @tests_bp.route("/success", methods=["GET"])
 def example_api_success():
     data = TestModel(title="riad-azz", content="Successful API response")
+    return success_response(data, 200)
+
+
+@tests_bp.route("/cached", methods=["GET"])
+def example_api_cached():
+    data = TestModel(title="riad-azz", content="Cached API response")
     return success_response(data, 200)
 
 

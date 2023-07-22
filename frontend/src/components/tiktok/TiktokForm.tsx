@@ -5,7 +5,7 @@ import { proxyApiURL, tiktokApiURL } from "@/configs/api";
 import { VideoInfo } from "@/types/tiktok";
 import { ErrorResponse } from "@/types";
 import { Icons } from "@/components/Icons";
-import { isJsonResponse, makeApiRequest } from "@/lib/utils";
+import { isJsonResponse, makeHttpRequest } from "@/lib/utils";
 import { validateTiktokUrl } from "@/lib/tiktok/validators";
 import { ClientException } from "@/exceptions";
 
@@ -68,12 +68,8 @@ const TiktokForm = () => {
     }
 
     try {
-      const requestArgs = {
-        url: `${tiktokApiURL}?url=${inputUrl}`,
-        fetchError: "API service is down, please try again later.",
-        responseError: "Bad response from the API, please try again.",
-      };
-      const response = await makeApiRequest<VideoInfo>(requestArgs);
+      const requestUrl = `${tiktokApiURL}?url=${inputUrl}`;
+      const response = await makeHttpRequest<VideoInfo>(requestUrl);
 
       if (response.status === "error") {
         throw new ClientException(response.message);
