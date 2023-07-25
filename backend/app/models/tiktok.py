@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from app.utils.models import JSONSerializable
+from app.utils.models import SerializableDataclass
 
 
 @dataclass
-class VideoInfo(JSONSerializable):
+class VideoInfo(SerializableDataclass):
     filename: str
     is_watermarked: bool
     duration: int

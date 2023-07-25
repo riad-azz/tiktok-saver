@@ -34,12 +34,10 @@ def video_info_api():
     try:
         video_info = format_video_info(data)
     except Exception as e:
-        print(f"Problem formatting json for {video_url}\n"
-              f"error: {e}")
+        print(f"Problem formatting json for {video_url}\n" f"error: {e}")
         raise InternalServerError("Something went wrong, please try again.")
 
     if video_info is None:
         raise BadRequest("Could not find video URL for this post.")
 
-    serialized_data = video_info.to_dict()
-    return success_response(serialized_data, 200)
+    return success_response(video_info, 200)

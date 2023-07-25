@@ -13,6 +13,11 @@ class JSONSerializable:
         return self.__dict__
 
 
+class SerializableDataclass:
+    def to_dict(self):
+        return JSONSerializer.serialize(self)
+
+
 class APIResponse(JSONSerializable):
     def __init__(self, status: str):
         self.status = status
@@ -21,7 +26,10 @@ class APIResponse(JSONSerializable):
 class SuccessResponse(APIResponse):
     def __init__(self, data):
         super().__init__(status="success")
-        self.data = JSONSerializer.serialize(data)
+        try:
+            self.data = data.to_dict()
+        except:
+            raise Exception(f"{type(data).__name__} is not JSON serializable")
 
 
 class ErrorResponse(APIResponse):
