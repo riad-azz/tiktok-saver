@@ -7,7 +7,7 @@ services:
       - 6379:6379
     environment:
       - REDIS_PASSWORD=REDIS-PASSWORD
-    command: redis-server --requirepass REDIS-PASSWORD --protected-mode no
+    command: redis-server --requirepass REDIS-PASSWORD
     restart: always
 
   backend:

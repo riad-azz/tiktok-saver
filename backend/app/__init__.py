@@ -3,8 +3,9 @@ from flask import Flask
 
 # Local modules
 from app.routes import api_bp
-from app.extensions import cors, cache, limiter
 from app.config import DevConfig, ProdConfig
+from app.extensions import cors, cache, limiter
+from app.utils.api import error_response
 
 
 def create_app(debug: bool = False):
@@ -26,5 +27,8 @@ def create_app(debug: bool = False):
 
     # Register blueprints or routes
     app.register_blueprint(api_bp)
+
+    # Not found error handler
+    app.errorhandler(404)(lambda e: error_response("Why are you here friend?"))
 
     return app

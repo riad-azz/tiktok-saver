@@ -33,7 +33,7 @@ def before_request():
     # Check if user is rate limited
     limiter.check()
 
-    # Attempt to fetch cached response
+    # Return cached response if it exists
     cached_response = get_cached_response(request)
     if cached_response is not None:
         return cached_response
@@ -41,8 +41,8 @@ def before_request():
 
 @api_bp.after_request
 def after_request(response):
+    # Cache the response if it is successful (status code 200)
     if response.status_code == 200:
-        # Cache the response if it is successful (status code 200)
         set_cached_response(request, response)
     return response
 
