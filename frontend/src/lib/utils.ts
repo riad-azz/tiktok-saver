@@ -40,7 +40,7 @@ export const makeHttpRequest = async <T>(
       return makeErrorResponse(response.message);
     } else if (axiosError.request) {
       console.error("Request Error:", axiosError.request);
-      return makeErrorResponse("Request timeout, please and try again.");
+      return makeErrorResponse("Request timeout, please try again.");
     } else {
       console.error("Error:", axiosError.message);
       return makeErrorResponse("Something went wrong, please try again.");
