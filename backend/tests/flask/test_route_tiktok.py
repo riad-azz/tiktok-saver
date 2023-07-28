@@ -26,7 +26,4 @@ def test_tiktok_api_invalid_url(app):
         assert response.status_code == 400
         assert response.headers["Content-Type"] == "application/json"
         assert response.json["status"] == "error"
-        assert (
-                response.json["message"]
-                == "Invalid Tiktok URL, please enter a valid post URL."
-        )
+        assert response.json["message"] == "Invalid Tiktok URL, please enter a valid post URL."

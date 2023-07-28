@@ -1,13 +1,22 @@
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { APIResponse, ErrorResponse, SuccessResponse } from "@/types";
-import { VideoInfo } from "@/types/tiktok";
-import axios, { AxiosResponse, AxiosError } from "axios";
 
 export const isJsonResponse = (response: Response) => {
   const contentType = response.headers.get("content-type");
   return contentType && contentType.includes("application/json");
 };
 
-export const makeErrorResponse = (message = "Something went wrong.") => {
+export const makeSuccessResponse = <T>(data: any) => {
+  const response: SuccessResponse<T> = {
+    status: "success",
+    data,
+  };
+  return response;
+};
+
+export const makeErrorResponse = (
+  message: string = "Something went wrong."
+) => {
   const response: ErrorResponse = {
     status: "error",
     message,
@@ -15,29 +24,20 @@ export const makeErrorResponse = (message = "Something went wrong.") => {
   return response;
 };
 
-export const makeHttpRequest = async <T>(
-  url: string,
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET",
-  data: any = null,
-  headers: { [key: string]: string } = {},
-  timeout: number = 0
-): Promise<APIResponse<T>> => {
+export const makeHttpRequest = async <T>({
+  ...args
+}: AxiosRequestConfig): Promise<APIResponse<T>> => {
   try {
-    const response: AxiosResponse = await axios({
-      url: url,
-      method: method || "GET",
-      data: data,
-      headers: headers,
-      timeout: timeout,
-    });
+    const response: AxiosResponse = await axios(args);
 
-    const successResponse = response.data as SuccessResponse<T>;
+    const successResponse = makeSuccessResponse<T>(response.data);
     return successResponse;
   } catch (error: any) {
     const axiosError: AxiosError = error;
     if (axiosError.response) {
       const response = axiosError.response.data as ErrorResponse;
-      return makeErrorResponse(response.message);
+      const message = response.message ?? axiosError.message;
+      return makeErrorResponse(message);
     } else if (axiosError.request) {
       console.error("Request Error:", axiosError.request);
       return makeErrorResponse("Request timeout, please try again.");
