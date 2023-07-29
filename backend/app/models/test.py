@@ -1,11 +1,6 @@
-# Other modules
-from dataclasses import dataclass
-
-# Local modules
-from app.utils.models import SerializableDataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class TestModel(SerializableDataclass):
+class TestModel(BaseModel):
     title: str
     content: str

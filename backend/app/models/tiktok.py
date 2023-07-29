@@ -1,12 +1,7 @@
-# Other modules
-from dataclasses import dataclass
-
-# Local modules
-from app.utils.models import SerializableDataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class VideoInfo(SerializableDataclass):
+class VideoInfo(BaseModel):
     filename: str
     is_watermarked: bool
     duration: int

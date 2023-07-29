@@ -12,7 +12,7 @@ load_dotenv()
 
 CACHE_ENABLED = os.environ.get("CACHE_ENABLED", "False") == "True"
 
-EXEMPTED_ROUTES = ["/api/example/route/", ]
+EXEMPTED_ROUTES = []
 
 
 def make_api_cache_key(request: Request):
