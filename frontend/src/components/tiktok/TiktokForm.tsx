@@ -10,8 +10,12 @@ import { validateTiktokUrl } from "@/lib/tiktok/validators";
 import { ClientException } from "@/exceptions";
 
 async function downloadVideo(videoInfo: VideoInfo) {
+  const encodedUrl = encodeURIComponent(videoInfo.video_link);
+  if (!encodedUrl) {
+    console.error("The encoded url is undefined:", encodedUrl);
+    throw new ClientException();
+  }
   try {
-    const encodedUrl = encodeURIComponent(videoInfo.video_link);
     const response = await fetch(`${proxyApiURL}?url=${encodedUrl}`);
     const isJson = isJsonResponse(response);
     if (isJson) {
@@ -28,7 +32,7 @@ async function downloadVideo(videoInfo: VideoInfo) {
     a.click();
     a.remove();
   } catch (error: any) {
-    console.log(error.message);
+    console.error(error.message);
     const a = document.createElement("a");
     a.target = "_blank";
     a.href = videoInfo.video_link;
@@ -69,7 +73,7 @@ const TiktokForm = () => {
 
     try {
       const requestUrl = `${tiktokApiURL}?url=${inputUrl}`;
-      const response = await makeHttpRequest<VideoInfo>(requestUrl);
+      const response = await makeHttpRequest<VideoInfo>({ url: requestUrl });
 
       if (response.status === "error") {
         throw new ClientException(response.message);

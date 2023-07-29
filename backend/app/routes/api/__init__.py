@@ -44,6 +44,7 @@ def after_request(response):
     # Cache the response if it is successful (status code 200)
     if response.status_code == 200:
         set_cached_response(request, response)
+
     return response
 
 

@@ -29,6 +29,7 @@ def proxy_file_api():
 
     try:
         response = requests.get(decoded_url, stream=True)
+
         headers = response.headers
 
         if headers.get("Content-type") != "video/mp4":

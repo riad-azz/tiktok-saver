@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { APIResponse, ErrorResponse, SuccessResponse } from "@/types";
+import { VideoInfo } from "@/types/tiktok";
 
 export const isJsonResponse = (response: Response) => {
   const contentType = response.headers.get("content-type");
@@ -29,9 +30,11 @@ export const makeHttpRequest = async <T>({
 }: AxiosRequestConfig): Promise<APIResponse<T>> => {
   try {
     const response: AxiosResponse = await axios(args);
-
-    const successResponse = makeSuccessResponse<T>(response.data);
-    return successResponse;
+    if (response.data.status === "success") {
+      return response.data as SuccessResponse<T>;
+    } else {
+      return makeSuccessResponse<T>(response.data);
+    }
   } catch (error: any) {
     const axiosError: AxiosError = error;
     if (axiosError.response) {

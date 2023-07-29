@@ -16,8 +16,9 @@ services:
       # Flask Variables
       - SECRET_KEY=YOUR-SECRET-KEY
       # Flask Cache
-      - CACHE_REDIS_ENABLED=True
-      - CACHE_REDIS_URL=redis://:REDIS-PASSWORD@redis_db:6379/0
+      - CACHE_ENABLED=True
+      - CACHE_TYPE=RedisCache
+      - CACHE_STORAGE_URL=redis://:REDIS-PASSWORD@redis_db:6379/0
       # Flask Ratelimit
       - RATELIMIT_ENABLED=True
       - RATELIMIT_LIMIT=5/minute
