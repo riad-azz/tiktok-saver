@@ -1,12 +1,18 @@
+# Other modules
+import os
 import pytest
-from flask_limiter.util import get_remote_address
+
+# Local modules
 from app import create_app
 from app.extensions import limiter
+from flask_limiter.util import get_remote_address
 
 
 @pytest.fixture
 def app():
-    app = create_app()
+    DEBUG = os.environ.get("DEBUG", "False") == "True"
+    app = create_app(debug=DEBUG)
+
     limiter.enabled = True
     limiter.reset()
 

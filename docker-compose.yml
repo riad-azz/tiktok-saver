@@ -15,14 +15,13 @@ services:
     environment:
       # Flask Variables
       - SECRET_KEY=YOUR-SECRET-KEY
+      # Flask Ratelimit
+      - RATELIMIT_ENABLED=True
+      - RATELIMIT_STORAGE_URI=redis://:REDIS-PASSWORD@redis_db:6379/0
       # Flask Cache
       - CACHE_ENABLED=True
       - CACHE_TYPE=RedisCache
-      - CACHE_STORAGE_URL=redis://:REDIS-PASSWORD@redis_db:6379/0
-      # Flask Ratelimit
-      - RATELIMIT_ENABLED=True
-      - RATELIMIT_LIMIT=5/minute
-      - RATELIMIT_STORAGE_URL=redis://:REDIS-PASSWORD@redis_db:6379/1
+      - CACHE_STORAGE_URL=redis://:REDIS-PASSWORD@redis_db:6379/1
     command: gunicorn --bind 0.0.0.0:5000 server:app
     ports:
       - "5000:5000"

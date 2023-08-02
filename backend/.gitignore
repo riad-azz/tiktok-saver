@@ -1,5 +1,8 @@
-.venv
-.idea
-.env.local
 **/__pycache___
-.pytest_cache
+**/.pytest_cache
+**/venv
+**/.idea
+**/.env*
+**/logs
+!.env.example
+

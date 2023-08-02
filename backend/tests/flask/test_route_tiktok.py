@@ -1,4 +1,8 @@
+# Other modules
+import os
 import pytest
+
+# Local modules
 from app import create_app
 
 VIDEO_POST_URL = "https://www.tiktok.com/@kevinlithium/video/7253860622557908266?is_from_webapp=1&sender_device=pc"
@@ -8,7 +12,8 @@ INVALID_URL = "https://www.example.com/"
 
 @pytest.fixture
 def app():
-    app = create_app()
+    DEBUG = os.environ.get("DEBUG", "False") == "True"
+    app = create_app(debug=DEBUG)
 
     return app
 

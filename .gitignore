@@ -6,3 +6,5 @@
 **/.idea
 **/.env
 **/prod.cookies.txt
+**/env*
+!**/.env.example
