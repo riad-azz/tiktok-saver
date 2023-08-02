@@ -1,6 +1,9 @@
 # Flask modules
 from flask import Flask
 
+# Other modules
+import os
+
 # Local modules
 from app.routes import api_bp
 from app.utils.logger import configure_logger
@@ -8,6 +11,11 @@ from app.extensions import cors, cache, limiter
 
 
 def create_app(debug: bool = False):
+    # Check if debug environment variable was passed
+    FLASK_DEBUG = os.environ.get('FLASK_DEBUG', False)
+    if FLASK_DEBUG:
+        debug = FLASK_DEBUG
+
     # Create the Flask application instance
     app = Flask(__name__,
                 template_folder="../templates",
@@ -34,5 +42,9 @@ def create_app(debug: bool = False):
 
     # Register blueprints or routes
     app.register_blueprint(api_bp)
+
+    # Global Ratelimit Checker
+    # this is used because auto_check is set to 'False'
+    app.before_request(lambda: limiter.check())
 
     return app

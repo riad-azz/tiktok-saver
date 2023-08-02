@@ -25,5 +25,6 @@ limiter = Limiter(
     key_func=get_remote_address,
     default_limits=['30/minute'],
     on_breach=default_error_responder,
+    auto_check=False
     # default_limits_exempt_when=default_exempt_when,
 )
