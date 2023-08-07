@@ -8,8 +8,8 @@ ENV_FILE_PATH = BASE_DIR / '.env'
 
 load_dotenv(ENV_FILE_PATH)
 
+# Flask
 SECRET_KEY = os.environ.get("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")
-
 # Ratelimit
 RATELIMIT_ENABLED = os.environ.get("RATELIMIT_ENABLED", "False") == "True"
 RATELIMIT_STORAGE_URI = os.environ.get("RATELIMIT_STORAGE_URI", "memory://")

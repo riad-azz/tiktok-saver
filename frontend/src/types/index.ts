@@ -11,6 +11,7 @@ export type SiteConfig = {
 
 export type SuccessResponse<T> = {
   status: "success";
+  message?: string;
   data: T;
 };
 

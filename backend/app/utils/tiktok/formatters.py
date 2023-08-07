@@ -1,5 +1,5 @@
 import time
-from app.models.tiktok import VideoInfo
+from app.schemas.tiktok import VideoInfo
 
 
 def format_post_json(post: dict) -> VideoInfo | None:

@@ -4,11 +4,6 @@ from flask import Flask
 # Other modules
 import os
 
-# Local modules
-from app.routes import api_bp
-from app.utils.logger import configure_logger
-from app.extensions import cors, cache, limiter
-
 
 def create_app(debug: bool = False):
     # Check if debug environment variable was passed
@@ -33,14 +28,17 @@ def create_app(debug: bool = False):
         app.config.from_object(ProdConfig)
 
     # Set up logger
-    configure_logger()
+    from app.utils.logger import setup_flask_logger
+    setup_flask_logger()
 
     # Initialize extensions
+    from app.extensions import cors, cache, limiter
     cors.init_app(app)
     cache.init_app(app)
     limiter.init_app(app)
 
     # Register blueprints or routes
+    from app.routes import api_bp
     app.register_blueprint(api_bp)
 
     # Global Ratelimit Checker

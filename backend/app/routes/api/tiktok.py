@@ -1,8 +1,9 @@
 # Flask modules
 from flask import Blueprint, request
+from werkzeug.exceptions import BadRequest, InternalServerError
 
 # Other modules
-from werkzeug.exceptions import BadRequest, InternalServerError
+import logging
 
 # Local modules
 from app.utils.api import success_response
@@ -34,10 +35,12 @@ def video_info_api():
     try:
         video_info = format_video_info(data)
     except Exception as e:
-        print(f"Problem formatting json for {video_url}\n" f"error: {e}")
+        logging.error(f"Problem formatting json for {video_url}\n" f"error: {e}")
         raise InternalServerError("Something went wrong, please try again.")
 
     if video_info is None:
         raise BadRequest("Could not find video URL for this post.")
 
-    return success_response(video_info, 200)
+    data = video_info.model_dump()
+
+    return success_response(data=data)

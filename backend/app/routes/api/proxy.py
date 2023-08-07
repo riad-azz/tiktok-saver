@@ -4,6 +4,7 @@ from werkzeug.exceptions import BadRequest, Unauthorized, InternalServerError
 
 # Other modules
 import time
+import logging
 import requests
 import urllib.parse
 
@@ -44,5 +45,5 @@ def proxy_file_api():
                         headers=dict(headers),
                         status=response.status_code)
     except Exception as e:
-        print(f"Something went wrong while proxy downloading : {e}")
+        logging.error(f"Something went wrong while proxy downloading : {e}")
         raise InternalServerError("Internal Server Error")
