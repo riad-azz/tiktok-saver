@@ -20,9 +20,12 @@ from app.routes.api.tiktok import tiktok_bp
 api_bp = Blueprint("api", __name__, url_prefix="/api")
 
 limiter.limit("5/minute")(api_bp)
-limiter.exempt(api_bp, flags=ExemptionScope.DEFAULT |
-                             ExemptionScope.APPLICATION |
-                             ExemptionScope.DESCENDENTS)
+limiter.exempt(
+    api_bp,
+    flags=ExemptionScope.DEFAULT
+    | ExemptionScope.APPLICATION
+    | ExemptionScope.DESCENDENTS,
+)
 
 
 @api_bp.errorhandler(Exception)
