@@ -1,5 +1,6 @@
 # Flask modules
 from flask import Blueprint, request
+from flask.wrappers import Response
 from flask_limiter import ExemptionScope
 from werkzeug.exceptions import HTTPException
 from flask_limiter.errors import RateLimitExceeded
@@ -49,9 +50,11 @@ def before_request():
 
 
 @api_bp.after_request
-def after_request(response):
-    if response.status_code == 200:
-        # Cache the response if it is successful (status code 200)
+def after_request(response: Response):
+    if response.headers.get("Is-Cached-Response") == "1":
+        # Remove internal cache header
+        response.headers.remove("Is-Cached-Response")
+        # Cache the response
         set_cached_response(request, response)
     return response
 

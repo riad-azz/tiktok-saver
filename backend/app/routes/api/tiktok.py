@@ -43,4 +43,4 @@ def video_info_api():
 
     data = video_info.model_dump()
 
-    return success_response(data=data)
+    return success_response(data=data, cache_response=True)
