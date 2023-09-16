@@ -1,41 +1,45 @@
+import { AiFillGithub } from "react-icons/ai";
+import { TbBrandNextjs } from "react-icons/tb";
+
 const Footer = () => {
   return (
-    <footer className="border-0 bg-gray-900 py-1 text-gray-200 shadow-lg">
-      <div className="mx-auto w-full max-w-screen-xl px-4 py-2 md:flex md:items-center md:justify-between">
-        <span className="text-sm sm:text-center">
-          © 2023
+    <footer className="mx-auto w-full max-w-screen-xl px-4 py-2 text-center text-gray-500">
+      <div className="flex flex-col items-center gap-2 text-center text-xs">
+        <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1">
+            <span>Powered by</span>
+            <a
+              target="_blank"
+              href="https://github.com/riad-azz/tiktok-saver"
+              className="flex items-center hover:underline"
+            >
+              <TbBrandNextjs className="text-xl" />
+              <span>Next.js</span>
+            </a>
+          </div>
+          <span>|</span>
+          <div>
+            <span>Designed by </span>
+            <a
+              target="_blank"
+              href="https://github.com/riad-azz"
+              className="text-primary hover:underline"
+            >
+              @riad-azz
+            </a>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          <p>This project is fully open source on</p>
           <a
             target="_blank"
-            href="https://github.com/riad-azz"
-            className="mx-1 hover:underline"
+            href="https://github.com/riad-azz/tiktok-saver"
+            className="text-primary flex items-center gap-1 hover:underline"
           >
-            riad-azz
+            <AiFillGithub className="text-sm" />
+            <span>Github</span>
           </a>
-          . All Rights Reserved.
-        </span>
-        <ul className="mt-3 flex flex-wrap items-center gap-4 text-sm font-medium md:mt-0">
-          <li>
-            <a
-              target="_blank"
-              href="https://github.com/riad-azz"
-              className="hover:underline"
-            >
-              Contact
-            </a>
-          </li>
-          <li>
-            <span>|</span>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              href="https://github.com/riad-azz"
-              className="hover:underline"
-            >
-              Privacy Policy
-            </a>
-          </li>
-        </ul>
+        </div>
       </div>
     </footer>
   );

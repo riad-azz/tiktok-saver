@@ -1,10 +1,21 @@
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { APIResponse, ErrorResponse, SuccessResponse } from "@/types";
-import { VideoInfo } from "@/types/tiktok";
+
+import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx";
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
 
 export const isJsonResponse = (response: Response) => {
   const contentType = response.headers.get("content-type");
   return contentType && contentType.includes("application/json");
+};
+
+export const isVideoResponse = (response: Response) => {
+  const contentType = response.headers.get("content-type");
+  return contentType && contentType.includes("video");
 };
 
 export const makeSuccessResponse = <T>(data: any) => {

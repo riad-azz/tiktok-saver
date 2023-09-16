@@ -4,10 +4,9 @@ import { mainMetadata } from "@/configs/seo";
 import "@/styles/globals.css";
 
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 
 const mainFont = MainFont({
-  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
 });
 
@@ -20,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={mainFont.className}>
-      <body className="flex min-h-screen flex-col overflow-x-hidden bg-slate-100 pt-12 text-white">
-        <Navbar />
+      <body className="flex min-h-screen flex-col overflow-x-hidden bg-slate-100 text-primary">
+        <Header />
         {children}
         <Footer />
       </body>
