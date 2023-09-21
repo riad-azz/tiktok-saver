@@ -1,4 +1,4 @@
-import { ClientException } from "@/exceptions";
+import { ClientException } from "@/lib/exceptions";
 
 export const isValidTiktokUrl = (url: string) => {
   const allowed_tiktok_urls = [

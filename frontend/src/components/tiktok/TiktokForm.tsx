@@ -8,7 +8,7 @@ import { ErrorResponse } from "@/types";
 import AlertError from "@/components/AlertError";
 import DownloadButton from "@/components/ui/DownloadButton";
 
-import { ClientException } from "@/exceptions";
+import { ClientException } from "@/lib/exceptions";
 import { validateTiktokUrl } from "@/lib/tiktok/validators";
 import {
   cn,
@@ -127,7 +127,7 @@ const TiktokForm = () => {
             placeholder="Paste Tiktok link here..."
             aria-label="video download URL input"
             title="video download URL input"
-            className="h-12 w-full rounded border border-gray-300 bg-gray-200 placeholder-gray-500/80"
+            className="h-12 w-full rounded border border-gray-300 placeholder-gray-500/80"
           />
           <DownloadButton
             isLoading={isLoading}

@@ -11,7 +11,7 @@ const Footer = () => {
             <a
               target="_blank"
               href="https://github.com/riad-azz/tiktok-saver"
-              className="flex items-center hover:underline"
+              className="flex items-center text-primary hover:underline"
             >
               <TbBrandNextjs className="text-xl" />
               <span>Next.js</span>
@@ -34,7 +34,7 @@ const Footer = () => {
           <a
             target="_blank"
             href="https://github.com/riad-azz/tiktok-saver"
-            className="text-primary flex items-center gap-1 hover:underline"
+            className="flex items-center gap-1 text-primary hover:underline"
           >
             <AiFillGithub className="text-sm" />
             <span>Github</span>
